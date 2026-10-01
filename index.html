@@ -8,10 +8,11 @@
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
       background: #000;
       color: #fff;
       font-family: Arial, sans-serif;
@@ -20,45 +21,81 @@
     }
 
     .app {
-      width: 100%;
-      max-width: 700px;
       height: 100vh;
-      margin: auto;
       display: flex;
       flex-direction: column;
+      max-width: 900px;
+      margin: auto;
+      background: #000;
     }
 
-    header {
-      height: 58px;
+    /* TOP BAR */
+    .topbar {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      border-bottom: 1px solid #222;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border: 0;
+      background: transparent;
+      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-bottom: 1px solid #222;
-      font-size: 20px;
-      font-weight: 600;
+      cursor: pointer;
+      border-radius: 50%;
     }
 
-    #chat {
+    .icon-btn:hover {
+      background: #1a1a1a;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 2px;
+    }
+
+    /* CHAT */
+    .chat {
       flex: 1;
       overflow-y: auto;
-      padding: 20px 16px 110px;
+      padding: 24px 16px 120px;
     }
 
     .welcome {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      color: #aaa;
-      margin-top: 30vh;
     }
 
-    .welcome h2 {
-      color: #fff;
+    .welcome h1 {
+      font-size: 28px;
       margin-bottom: 8px;
+    }
+
+    .welcome p {
+      color: #aaa;
+      font-size: 15px;
     }
 
     .message-row {
       display: flex;
-      width: 100%;
-      margin: 18px 0;
+      margin: 22px 0;
     }
 
     .message-row.user {
@@ -70,113 +107,156 @@
     }
 
     .message {
-      max-width: 85%;
-      line-height: 1.6;
-      white-space: pre-wrap;
+      max-width: 78%;
+      line-height: 1.55;
       font-size: 16px;
     }
 
     .user .message {
-      text-align: right;
+      background: #171717;
+      padding: 12px 15px;
+      border-radius: 18px 18px 4px 18px;
     }
 
     .ai .message {
-      text-align: left;
+      background: transparent;
+      padding: 4px 0;
     }
 
-    .actions {
+    /* SIX BUTTONS */
+    .message-tools {
       display: flex;
-      gap: 18px;
-      margin-top: 10px;
-      color: #999;
-      font-size: 17px;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
     }
 
-    .actions button {
-      background: none;
-      border: none;
-      color: #999;
-      padding: 0;
-      cursor: pointer;
-      font-size: 17px;
-    }
-
-    .actions button:hover {
+    .tool-btn {
+      width: 34px;
+      height: 34px;
+      border: 0;
+      background: transparent;
       color: #fff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
     }
 
-    .input-area {
+    .tool-btn:hover {
+      background: #171717;
+    }
+
+    .tool-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* INPUT */
+    .input-wrap {
       position: fixed;
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 100%;
-      max-width: 700px;
-      padding: 10px 12px 14px;
-      background: #000;
+      width: min(900px, 100%);
+      padding: 12px 14px 18px;
+      background: linear-gradient(transparent, #000 18%);
     }
 
     .input-box {
-      min-height: 52px;
+      min-height: 54px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 8px;
+      gap: 6px;
       border: 1px solid #333;
       border-radius: 28px;
-      background: #111;
+      padding: 5px 7px 5px 8px;
+      background: #050505;
     }
 
-    .icon-btn {
-      width: 38px;
-      height: 38px;
-      border: none;
-      border-radius: 50%;
-      background: transparent;
-      color: #fff;
-      font-size: 23px;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    #message {
+    #messageInput {
       flex: 1;
-      border: none;
+      min-width: 0;
+      resize: none;
+      border: 0;
       outline: none;
       background: transparent;
       color: #fff;
       font-size: 16px;
-      min-width: 0;
+      padding: 10px 6px;
+      font-family: inherit;
+      max-height: 120px;
     }
 
-    #message::placeholder {
+    #messageInput::placeholder {
       color: #888;
     }
 
-    #sendBtn {
-      display: none;
-      background: #fff;
-      color: #000;
-      font-size: 20px;
-    }
-
-    .voice-btn {
+    .input-btn {
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
     }
 
-    @media (max-width: 500px) {
-      header {
-        font-size: 18px;
+    .input-btn:hover {
+      background: #1a1a1a;
+    }
+
+    .input-btn svg {
+      width: 21px;
+      height: 21px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .send-btn {
+      background: #fff;
+      color: #000;
+      display: none;
+    }
+
+    .send-btn:hover {
+      background: #ddd;
+    }
+
+    .live-btn {
+      border: 1px solid #333;
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      .topbar {
+        padding: 0 8px;
+      }
+
+      .chat {
+        padding-left: 14px;
+        padding-right: 14px;
       }
 
       .message {
-        max-width: 90%;
+        max-width: 86%;
       }
 
-      .actions {
-        gap: 16px;
+      .welcome h1 {
+        font-size: 24px;
       }
     }
   </style>
@@ -186,192 +266,215 @@
 
 <div class="app">
 
-  <header>P-GPT</header>
+  <!-- TOP -->
+  <header class="topbar">
 
-  <div id="chat">
+    <button class="icon-btn" aria-label="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24">
+        <path d="M4 7h16M4 12h16M4 17h16"
+          stroke="currentColor"
+          fill="none"
+          stroke-width="2"
+          stroke-linecap="round"/>
+      </svg>
+    </button>
 
-    <div class="welcome">
-      <h2>Welcome to P-GPT</h2>
-      <p>How can I help you today? 😊</p>
+    <div class="brand">P-GPT</div>
+
+    <div class="top-actions">
+
+      <!-- New Chat -->
+      <button class="icon-btn" aria-label="New Chat">
+        <svg width="21" height="21" viewBox="0 0 24 24">
+          <path d="M12 20h9"/>
+          <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"/>
+        </svg>
+      </button>
+
+      <!-- More -->
+      <button class="icon-btn" aria-label="More">
+        <svg width="21" height="21" viewBox="0 0 24 24">
+          <circle cx="5" cy="12" r="1.3" fill="currentColor"/>
+          <circle cx="12" cy="12" r="1.3" fill="currentColor"/>
+          <circle cx="19" cy="12" r="1.3" fill="currentColor"/>
+        </svg>
+      </button>
+
+    </div>
+  </header>
+
+
+  <!-- CHAT -->
+  <main class="chat" id="chatArea">
+
+    <section class="welcome" id="welcome">
+      <h1>How can I help you?</h1>
+      <p>Ask anything to P-GPT</p>
+    </section>
+
+
+    <!-- USER MESSAGE -->
+    <div class="message-row user">
+      <div class="message">
+        Hello P-GPT 🙂
+      </div>
     </div>
 
-  </div>
 
-  <div class="input-area">
+    <!-- AI MESSAGE -->
+    <div class="message-row ai">
+
+      <div>
+
+        <div class="message">
+          Hello! 👋 How can I help you today?
+        </div>
+
+        <div class="message-tools">
+
+          <!-- COPY -->
+          <button class="tool-btn" aria-label="Copy">
+            <svg viewBox="0 0 24 24">
+              <rect x="9" y="9" width="11" height="11" rx="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+          </button>
+
+          <!-- LIKE -->
+          <button class="tool-btn" aria-label="Like">
+            <svg viewBox="0 0 24 24">
+              <path d="M7 10v10H4a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2h3Z"/>
+              <path d="M7 20h10.5a2 2 0 0 0 1.9-1.4l2-6A2 2 0 0 0 19.5 10H15l.7-4.2A3 3 0 0 0 12.8 2L7 10"/>
+            </svg>
+          </button>
+
+          <!-- DISLIKE -->
+          <button class="tool-btn" aria-label="Dislike">
+            <svg viewBox="0 0 24 24">
+              <path d="M7 14V4H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h3Z"/>
+              <path d="M7 4h10.5a2 2 0 0 1 1.9 1.4l2 6A2 2 0 0 1 19.5 14H15l.7 4.2a3 3 0 0 1-2.9 3.8L7 14"/>
+            </svg>
+          </button>
+
+          <!-- SPEAKER -->
+          <button class="tool-btn" aria-label="Speaker">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 9v6h4l5 4V5L8 9H4Z"/>
+              <path d="M17 9a4 4 0 0 1 0 6"/>
+              <path d="M19.5 6.5a8 8 0 0 1 0 11"/>
+            </svg>
+          </button>
+
+          <!-- SHARE -->
+          <button class="tool-btn" aria-label="Share">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 16V4"/>
+              <path d="m7 9 5-5 5 5"/>
+              <path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7"/>
+            </svg>
+          </button>
+
+          <!-- MORE -->
+          <button class="tool-btn" aria-label="More">
+            <svg viewBox="0 0 24 24">
+              <circle cx="5" cy="12" r="1.2" fill="currentColor"/>
+              <circle cx="12" cy="12" r="1.2" fill="currentColor"/>
+              <circle cx="19" cy="12" r="1.2" fill="currentColor"/>
+            </svg>
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+
+  <!-- INPUT -->
+  <div class="input-wrap">
+
     <div class="input-box">
 
-      <button class="icon-btn" onclick="openFiles()">＋</button>
+      <!-- PLUS -->
+      <button class="input-btn" aria-label="Add">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+      </button>
 
-      <input
-        id="message"
-        type="text"
-        placeholder="Reply To P-GPT"
-        autocomplete="off"
-      >
+      <textarea
+        id="messageInput"
+        rows="1"
+        placeholder="Reply To P-GPT"></textarea>
 
-      <button
-        id="voiceBtn"
-        class="icon-btn voice-btn"
-        onclick="startVoice()"
-      >🎙️</button>
+      <!-- VOICE -->
+      <button class="input-btn" id="voiceBtn" aria-label="Voice">
+        <svg viewBox="0 0 24 24">
+          <rect x="9" y="3" width="6" height="12" rx="3"/>
+          <path d="M5 11a7 7 0 0 0 14 0"/>
+          <path d="M12 18v3M9 21h6"/>
+        </svg>
+      </button>
 
-      <button
-        id="sendBtn"
-        class="icon-btn"
-        onclick="sendMessage()"
-      >⬆️</button>
+      <!-- LIVE -->
+      <button class="input-btn live-btn" id="liveBtn" aria-label="Live">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="8"/>
+          <circle cx="12" cy="12" r="3" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <!-- SEND -->
+      <button class="input-btn send-btn" id="sendBtn" aria-label="Send">
+        <svg viewBox="0 0 24 24">
+          <path d="m4 4 16 8-16 8 3-8-3-8Z"/>
+          <path d="M7 12h13"/>
+        </svg>
+      </button>
 
     </div>
+
   </div>
 
 </div>
 
+
 <script>
-
-  const input = document.getElementById("message");
+  const input = document.getElementById("messageInput");
   const sendBtn = document.getElementById("sendBtn");
-  const voiceBtn = document.getElementById("voiceBtn");
-  const chat = document.getElementById("chat");
+  const liveBtn = document.getElementById("liveBtn");
 
-  input.addEventListener("input", function () {
+  function updateInputButtons() {
+    const hasText = input.value.trim().length > 0;
 
-    if (input.value.trim().length > 0) {
-      voiceBtn.style.display = "none";
-      sendBtn.style.display = "flex";
-    } else {
-      voiceBtn.style.display = "flex";
-      sendBtn.style.display = "none";
-    }
+    sendBtn.style.display = hasText ? "flex" : "none";
+    liveBtn.style.display = hasText ? "none" : "flex";
+  }
 
-  });
+  input.addEventListener("input", updateInputButtons);
 
-  input.addEventListener("keydown", function(e) {
-
-    if (e.key === "Enter") {
-      e.preventDefault();
-      sendMessage();
-    }
-
-  });
-
-  function sendMessage() {
-
+  sendBtn.addEventListener("click", () => {
     const text = input.value.trim();
 
     if (!text) return;
 
-    const welcome = document.querySelector(".welcome");
-
-    if (welcome) {
-      welcome.remove();
-    }
-
-    // User message
-    const userRow = document.createElement("div");
-    userRow.className = "message-row user";
-
-    const userMessage = document.createElement("div");
-    userMessage.className = "message";
-    userMessage.textContent = text;
-
-    userRow.appendChild(userMessage);
-    chat.appendChild(userRow);
-
-    // Demo AI response
-    const aiRow = document.createElement("div");
-    aiRow.className = "message-row ai";
-
-    const aiContainer = document.createElement("div");
-
-    const aiMessage = document.createElement("div");
-    aiMessage.className = "message";
-    aiMessage.textContent =
-      "P-GPT is ready. 🤖\nYour real AI connection will be added next.";
-
-    aiContainer.appendChild(aiMessage);
-
-    // Six action buttons
-    const actions = document.createElement("div");
-    actions.className = "actions";
-
-    actions.innerHTML = `
-      <button onclick="likeMessage(this)">👍</button>
-      <button onclick="dislikeMessage(this)">👎</button>
-      <button onclick="regenerateMessage()">🔄</button>
-      <button onclick="copyMessage(this)">📋</button>
-      <button onclick="readMessage(this)">🔊</button>
-      <button onclick="shareMessage(this)">↗️</button>
-    `;
-
-    aiContainer.appendChild(actions);
-    aiRow.appendChild(aiContainer);
-    chat.appendChild(aiRow);
-
+    alert("Message sent: " + text);
     input.value = "";
-    voiceBtn.style.display = "flex";
-    sendBtn.style.display = "none";
+    updateInputButtons();
+  });
 
-    chat.scrollTop = chat.scrollHeight;
-  }
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
 
-  function openFiles() {
-    alert("Photo and file upload will be connected next.");
-  }
-
-  function startVoice() {
-    alert("P-GPT Live Voice will be connected next.");
-  }
-
-  function likeMessage(button) {
-    button.style.color = "#fff";
-  }
-
-  function dislikeMessage(button) {
-    button.style.color = "#fff";
-  }
-
-  function regenerateMessage() {
-    alert("Regenerate will be connected to the AI next.");
-  }
-
-  function copyMessage(button) {
-    const message =
-      button.closest(".ai").querySelector(".message");
-
-    navigator.clipboard.writeText(message.textContent);
-  }
-
-  function readMessage(button) {
-    const message =
-      button.closest(".ai").querySelector(".message");
-
-    const speech = new SpeechSynthesisUtterance(
-      message.textContent
-    );
-
-    speechSynthesis.speak(speech);
-  }
-
-  function shareMessage(button) {
-
-    const message =
-      button.closest(".ai").querySelector(".message");
-
-    if (navigator.share) {
-
-      navigator.share({
-        title: "P-GPT",
-        text: message.textContent
-      });
-
-    } else {
-
-      navigator.clipboard.writeText(message.textContent);
-      alert("Response copied.");
-
+      if (input.value.trim()) {
+        sendBtn.click();
+      }
     }
-  }
+  });
 
+  updateInputButtons();
 </script>
 
 </body>
