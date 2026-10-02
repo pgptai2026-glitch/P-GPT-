@@ -12,192 +12,238 @@
   padding:0;
 }
 
-html,body{
-  width:100%;
-  height:100%;
+body{
   background:#000;
   color:#fff;
   font-family:Arial,Helvetica,sans-serif;
+  height:100vh;
   overflow:hidden;
 }
 
-button,input{
-  font:inherit;
+button,input,textarea{
+  font-family:inherit;
 }
 
 button{
-  border:0;
   cursor:pointer;
 }
 
-svg{
-  width:22px;
-  height:22px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.8;
-  stroke-linecap:round;
-  stroke-linejoin:round;
+.hidden{
+  display:none !important;
 }
 
-/* ================= LOGIN ================= */
+/* ================= AUTH ================= */
 
-.login-screen{
+.auth-screen{
   position:fixed;
   inset:0;
   background:#000;
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:2000;
   padding:20px;
+  z-index:500;
 }
 
-.login-box{
+.auth-box{
   width:100%;
   max-width:390px;
+}
+
+.auth-logo{
   text-align:center;
-}
-
-.login-logo{
-  width:64px;
-  height:64px;
-  border-radius:18px;
-  background:#fff;
-  color:#000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:0 auto 22px;
-  font-size:34px;
-  font-weight:800;
-}
-
-.login-title{
-  font-size:25px;
+  font-size:32px;
   font-weight:700;
   margin-bottom:8px;
 }
 
-.login-subtitle{
-  color:#777;
+.auth-subtitle{
+  text-align:center;
+  color:#888;
   font-size:14px;
   margin-bottom:28px;
 }
 
-.login-input{
+.auth-form{
+  background:#111;
+  border:1px solid #252525;
+  border-radius:20px;
+  padding:24px;
+}
+
+.auth-title{
+  text-align:center;
+  font-size:22px;
+  font-weight:600;
+  margin-bottom:20px;
+}
+
+.auth-label{
+  display:block;
+  color:#aaa;
+  font-size:13px;
+  margin:14px 0 7px;
+}
+
+.auth-input{
   width:100%;
-  height:52px;
-  background:#0d0d0d;
-  border:1px solid #242424;
-  border-radius:12px;
+  height:48px;
+  background:#080808;
   color:#fff;
-  padding:0 15px;
+  border:1px solid #303030;
+  border-radius:12px;
   outline:none;
-  margin-bottom:12px;
+  padding:0 14px;
+  font-size:15px;
 }
 
-.login-input:focus{
-  border-color:#555;
+.auth-input:focus{
+  border-color:#666;
 }
 
-.login-btn{
+.auth-button{
   width:100%;
-  height:52px;
+  height:48px;
+  margin-top:20px;
+  border:0;
   border-radius:12px;
   background:#fff;
   color:#000;
-  font-weight:700;
-  margin-top:4px;
+  font-weight:600;
 }
 
-.switch-auth{
-  margin-top:20px;
+.auth-switch{
+  text-align:center;
   color:#777;
-  font-size:14px;
+  font-size:13px;
+  margin-top:18px;
 }
 
-.switch-auth button{
+.auth-switch button{
+  border:0;
   background:none;
   color:#fff;
-  margin-left:5px;
-  text-decoration:underline;
+  font-weight:600;
+}
+
+.auth-error{
+  min-height:18px;
+  color:#ff6b6b;
+  font-size:13px;
+  text-align:center;
+  margin-top:12px;
 }
 
 /* ================= APP ================= */
 
 .app{
-  width:100%;
-  height:100%;
-  display:none;
+  height:100vh;
+  display:flex;
   flex-direction:column;
 }
 
-/* ================= HEADER ================= */
+/* TOPBAR */
 
-.header{
+.topbar{
   height:58px;
-  min-height:58px;
-  border-bottom:1px solid #181818;
+  flex:none;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 12px;
+  padding:0 14px;
+  border-bottom:1px solid #1c1c1c;
+  background:#000;
+  position:relative;
+  z-index:20;
 }
 
-.header-left,
-.header-right{
+.top-left,
+.top-right{
   display:flex;
   align-items:center;
-  gap:4px;
+  gap:5px;
 }
 
-.header-title{
-  font-size:17px;
-  font-weight:700;
-  margin-left:7px;
+.logo-title{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:18px;
+  font-weight:600;
 }
 
 .icon-btn{
-  width:40px;
-  height:40px;
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:10px;
   background:transparent;
   color:#fff;
-  border-radius:10px;
   display:flex;
   align-items:center;
   justify-content:center;
 }
 
-.icon-btn:active,
-.input-btn:active,
-.message-action:active,
-.menu-item:active{
-  background:#181818;
+.icon-btn:hover{
+  background:#171717;
+}
+
+.icon-btn svg{
+  width:21px;
+  height:21px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
 }
 
 /* ================= CHAT ================= */
 
-.chat-area{
+.chat{
   flex:1;
   overflow-y:auto;
-  padding:18px 15px 120px;
+  padding:25px 16px 130px;
 }
+
+.chat::-webkit-scrollbar{
+  width:4px;
+}
+
+.chat::-webkit-scrollbar-thumb{
+  background:#333;
+  border-radius:10px;
+}
+
+/* WELCOME */
 
 .welcome{
   height:100%;
   display:flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
   text-align:center;
-  color:#777;
+  padding-bottom:80px;
+}
+
+.welcome h1{
+  font-size:28px;
+  font-weight:600;
+  margin-bottom:10px;
+}
+
+.welcome p{
+  color:#888;
   font-size:15px;
 }
 
+/* MESSAGE */
+
 .message-row{
-  display:flex;
   width:100%;
-  margin:12px 0;
+  display:flex;
+  margin-bottom:24px;
 }
 
 .message-row.user{
@@ -209,488 +255,422 @@ svg{
 }
 
 .message{
-  max-width:86%;
-}
-
-.user-bubble{
-  background:#1d1d1d;
-  border-radius:18px 18px 5px 18px;
-  padding:12px 15px;
-  line-height:1.5;
-  font-size:15px;
+  max-width:82%;
+  font-size:16px;
+  line-height:1.6;
   white-space:pre-wrap;
+  overflow-wrap:anywhere;
 }
 
-.ai-text{
-  color:#eee;
-  font-size:15px;
-  line-height:1.65;
-  white-space:pre-wrap;
+.user .message{
+  background:#202020;
+  padding:11px 15px;
+  border-radius:18px 18px 4px 18px;
 }
 
-/* ================= THINKING ================= */
-
-.thinking{
-  color:#777;
-  font-size:15px;
-  line-height:1.65;
+.ai .message{
+  padding:4px 0;
 }
 
-.thinking-dots::after{
-  content:".";
-  animation:thinkingDots 1.2s infinite;
-}
+/* AI LOADING */
 
-@keyframes thinkingDots{
-  0%{
-    content:".";
-  }
-
-  33%{
-    content:"..";
-  }
-
-  66%{
-    content:"...";
-  }
-
-  100%{
-    content:".";
-  }
-}
-
-/* AI MESSAGE ACTIONS */
-
-.message-actions{
+.ai-loading{
   display:flex;
   align-items:center;
-  gap:2px;
+  gap:7px;
+  color:#888;
+  padding:8px 0;
+}
+
+.loading-dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#888;
+  animation:pulse 1.2s infinite ease-in-out;
+}
+
+.loading-dot:nth-child(2){
+  animation-delay:.15s;
+}
+
+.loading-dot:nth-child(3){
+  animation-delay:.3s;
+}
+
+@keyframes pulse{
+  0%,80%,100%{
+    opacity:.25;
+    transform:scale(.8);
+  }
+  40%{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+/* AI TOOLS */
+
+.ai-tools{
+  display:flex;
+  align-items:center;
+  gap:4px;
   margin-top:8px;
 }
 
-.message-action{
+.tool-btn{
   width:34px;
   height:34px;
-  border-radius:8px;
+  border:0;
   background:transparent;
-  color:#777;
+  color:#888;
   display:flex;
   align-items:center;
   justify-content:center;
+  border-radius:8px;
 }
 
-.message-action:hover{
+.tool-btn:hover{
+  background:#171717;
   color:#fff;
-  background:#151515;
 }
 
-.message-action svg{
+.tool-btn svg{
   width:18px;
   height:18px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
 }
 
 /* ================= INPUT ================= */
 
 .input-area{
   position:fixed;
-  bottom:0;
   left:0;
   right:0;
+  bottom:0;
   padding:10px 12px 14px;
-  background:linear-gradient(
-    to top,
-    #000 70%,
-    rgba(0,0,0,.92) 85%,
-    transparent
-  );
+  background:linear-gradient(to top,#000 75%,transparent);
+  z-index:30;
 }
 
 .input-box{
   max-width:850px;
   margin:auto;
-  min-height:52px;
+  min-height:58px;
+  background:#171717;
   border:1px solid #292929;
-  background:#0b0b0b;
-  border-radius:17px;
+  border-radius:22px;
   display:flex;
-  align-items:center;
-  padding:5px;
-}
-
-.input{
-  flex:1;
-  min-width:0;
-  background:transparent;
-  border:0;
-  outline:0;
-  color:#fff;
-  padding:0 8px;
-  font-size:15px;
-}
-
-.input::placeholder{
-  color:#666;
+  align-items:flex-end;
+  padding:8px;
+  gap:6px;
 }
 
 .input-btn{
-  width:42px;
-  height:42px;
-  border-radius:12px;
+  flex:none;
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:50%;
   background:transparent;
-  color:#fff;
+  color:#aaa;
   display:flex;
   align-items:center;
   justify-content:center;
 }
 
+.input-btn:hover{
+  background:#242424;
+  color:#fff;
+}
+
 .input-btn svg{
-  width:21px;
-  height:21px;
+  width:20px;
+  height:20px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+#messageInput{
+  flex:1;
+  min-width:0;
+  max-height:130px;
+  resize:none;
+  border:0;
+  outline:none;
+  background:transparent;
+  color:#fff;
+  font-size:16px;
+  line-height:22px;
+  padding:9px 4px;
+}
+
+#messageInput::placeholder{
+  color:#777;
 }
 
 .send-btn{
   background:#fff;
   color:#000;
-  display:none;
+}
+
+.send-btn:hover{
+  background:#ddd;
+  color:#000;
 }
 
 /* ================= SIDE MENU ================= */
 
-.overlay{
+.menu-overlay{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.65);
-  z-index:900;
-  display:none;
-}
-
-.overlay.active{
-  display:block;
+  z-index:80;
 }
 
 .side-menu{
   position:fixed;
-  top:0;
-  left:-310px;
-  width:290px;
-  height:100%;
-  background:#090909;
-  border-right:1px solid #202020;
-  z-index:1000;
-  transition:.25s ease;
-  padding:15px 12px;
-}
-
-.side-menu.active{
   left:0;
+  top:0;
+  bottom:0;
+  width:290px;
+  max-width:85%;
+  background:#0b0b0b;
+  border-right:1px solid #252525;
+  z-index:90;
+  padding:18px;
+  transform:translateX(-100%);
+  transition:transform .2s ease;
 }
 
-.menu-logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 8px 22px;
-  font-weight:700;
+.side-menu.open{
+  transform:translateX(0);
 }
 
-.menu-logo-p{
-  width:36px;
-  height:36px;
-  border-radius:10px;
-  background:#fff;
-  color:#000;
+.menu-header{
   display:flex;
   align-items:center;
-  justify-content:center;
-  font-weight:800;
+  justify-content:space-between;
+  margin-bottom:25px;
+}
+
+.menu-brand{
+  font-size:20px;
+  font-weight:600;
 }
 
 .menu-item{
   width:100%;
   height:48px;
-  border-radius:10px;
+  border:0;
   background:transparent;
   color:#ddd;
   display:flex;
   align-items:center;
   gap:13px;
   padding:0 12px;
-  margin:2px 0;
+  border-radius:10px;
   text-align:left;
+  margin-bottom:6px;
+}
+
+.menu-item:hover{
+  background:#181818;
 }
 
 .menu-item svg{
   width:20px;
   height:20px;
-  color:#aaa;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
 }
 
-.menu-divider{
-  height:1px;
-  background:#1d1d1d;
-  margin:12px 5px;
-}
-
-/* ================= PAGES ================= */
-
-.page{
-  position:fixed;
-  inset:0;
-  background:#000;
-  z-index:800;
-  display:none;
-  flex-direction:column;
-}
-
-.page.active{
-  display:flex;
-}
-
-.page-header{
-  height:58px;
-  min-height:58px;
-  border-bottom:1px solid #181818;
-  display:flex;
-  align-items:center;
-  padding:0 10px;
-  font-weight:700;
-}
-
-.page-header span{
-  margin-left:8px;
-}
-
-.page-content{
-  flex:1;
-  overflow-y:auto;
-  padding:18px 15px 30px;
-}
-
-/* ================= SEARCH ================= */
-
-.search-box{
-  height:50px;
-  border:1px solid #262626;
-  background:#0b0b0b;
-  border-radius:12px;
-  display:flex;
-  align-items:center;
-  padding:0 13px;
-  gap:9px;
-  margin-bottom:22px;
-}
-
-.search-box input{
-  flex:1;
-  background:transparent;
-  border:0;
-  outline:0;
-  color:#fff;
-}
-
-.section-title{
+.menu-user{
   color:#777;
   font-size:13px;
-  margin-bottom:10px;
-}
-
-.history-item{
-  padding:15px 10px;
-  border-bottom:1px solid #151515;
-  color:#ddd;
-}
-
-/* ================= SETTINGS ================= */
-
-.setting-group{
-  margin-bottom:25px;
-}
-
-.setting-title{
-  color:#777;
-  font-size:13px;
-  margin:0 8px 8px;
-}
-
-.setting-item{
-  min-height:54px;
-  border-bottom:1px solid #151515;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 8px;
-  color:#ddd;
-}
-
-.setting-right{
-  color:#666;
-  font-size:13px;
-}
-
-/* ================= ACCOUNT ================= */
-
-.account-card{
-  border:1px solid #222;
-  border-radius:15px;
-  padding:20px;
-  margin-bottom:20px;
-}
-
-.account-avatar{
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  background:#fff;
-  color:#000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:24px;
-  font-weight:800;
-  margin-bottom:14px;
-}
-
-.account-email{
-  color:#888;
-  margin-top:5px;
-  font-size:14px;
-}
-
-.logout-btn{
-  width:100%;
-  height:50px;
-  border-radius:12px;
-  background:#151515;
-  color:#fff;
-}
-
-/* ================= HELP ================= */
-
-.help-item{
-  min-height:54px;
-  border-bottom:1px solid #151515;
-  display:flex;
-  align-items:center;
-  padding:0 8px;
-  color:#ddd;
-}
-
-/* ================= LIVE VOICE ================= */
-
-.voice-page{
-  position:fixed;
-  inset:0;
-  background:#000;
-  z-index:1500;
-  display:none;
-  flex-direction:column;
-}
-
-.voice-page.active{
-  display:flex;
-}
-
-.voice-header{
-  height:58px;
-  border-bottom:1px solid #171717;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:17px;
-  font-weight:700;
-}
-
-.voice-content{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  padding:30px;
-  text-align:center;
-}
-
-.voice-circle{
-  width:135px;
-  height:135px;
-  border-radius:50%;
-  background:#101010;
-  border:1px solid #292929;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:28px;
-}
-
-.voice-circle svg{
-  width:48px;
-  height:48px;
-}
-
-.voice-status{
-  font-size:18px;
-  font-weight:600;
-  margin-bottom:10px;
-}
-
-.voice-text{
-  color:#777;
-  font-size:14px;
-  min-height:42px;
-  max-width:330px;
-  line-height:1.5;
-}
-
-.voice-stop{
-  width:54px;
-  height:54px;
-  border-radius:50%;
-  background:#fff;
-  color:#000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-top:30px;
-}
-
-.voice-stop svg{
-  width:22px;
-  height:22px;
-  fill:currentColor;
-  stroke:none;
+  padding:12px;
+  border-top:1px solid #222;
+  margin-top:20px;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 /* ================= MORE ================= */
 
 .more-menu{
   position:fixed;
-  top:55px;
+  top:52px;
   right:10px;
   width:190px;
-  background:#101010;
-  border:1px solid #272727;
-  border-radius:12px;
+  background:#111;
+  border:1px solid #292929;
+  border-radius:13px;
   padding:6px;
-  z-index:1200;
-  display:none;
-}
-
-.more-menu.active{
-  display:block;
+  z-index:70;
+  box-shadow:0 15px 40px rgba(0,0,0,.5);
 }
 
 .more-item{
   width:100%;
   height:42px;
-  border-radius:8px;
+  border:0;
   background:transparent;
   color:#ddd;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:0 10px;
   text-align:left;
-  padding:0 12px;
 }
 
 .more-item:hover{
-  background:#1a1a1a;
+  background:#1d1d1d;
+}
+
+.more-item svg{
+  width:18px;
+  height:18px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+/* ================= FILE PICKER ================= */
+
+.file-panel{
+  position:fixed;
+  bottom:78px;
+  left:10px;
+  width:230px;
+  background:#111;
+  border:1px solid #292929;
+  border-radius:14px;
+  padding:7px;
+  z-index:60;
+  box-shadow:0 15px 40px rgba(0,0,0,.5);
+}
+
+.file-option{
+  width:100%;
+  height:45px;
+  border:0;
+  background:transparent;
+  color:#ddd;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:0 10px;
+  border-radius:9px;
+  text-align:left;
+}
+
+.file-option:hover{
+  background:#1d1d1d;
+}
+
+.file-option svg{
+  width:19px;
+  height:19px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+/* ================= LIVE ================= */
+
+.live-panel{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  background:#000;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.live-title{
+  position:absolute;
+  top:22px;
+  font-size:20px;
+  font-weight:600;
+}
+
+.live-circle{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  background:#171717;
+  border:1px solid #333;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 0 0 15px #080808;
+}
+
+.live-circle svg{
+  width:55px;
+  height:55px;
+  stroke:#fff;
+  fill:none;
+  stroke-width:1.5;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.live-status{
+  margin-top:35px;
+  color:#aaa;
+  font-size:15px;
+}
+
+.live-controls{
+  position:absolute;
+  bottom:45px;
+  display:flex;
+  gap:18px;
+}
+
+.live-control{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  border:1px solid #333;
+  background:#171717;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.live-control svg{
+  width:23px;
+  height:23px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.live-end{
+  background:#fff;
+  color:#000;
 }
 
 /* ================= TOAST ================= */
@@ -699,7 +679,7 @@ svg{
   position:fixed;
   left:50%;
   bottom:90px;
-  transform:translateX(-50%) translateY(15px);
+  transform:translateX(-50%) translateY(20px);
   background:#fff;
   color:#000;
   padding:10px 15px;
@@ -707,8 +687,8 @@ svg{
   font-size:13px;
   opacity:0;
   pointer-events:none;
-  transition:.25s;
-  z-index:3000;
+  transition:.2s;
+  z-index:1000;
 }
 
 .toast.show{
@@ -716,29 +696,39 @@ svg{
   transform:translateX(-50%) translateY(0);
 }
 
-/* ================= RESPONSIVE ================= */
+/* MOBILE */
 
-@media(max-width:480px){
+@media(max-width:600px){
 
-  .header{
-    padding:0 7px;
+  .topbar{
+    height:55px;
+    padding:0 9px;
   }
 
-  .header-title{
-    font-size:16px;
+  .logo-title{
+    font-size:17px;
+  }
+
+  .chat{
+    padding-left:13px;
+    padding-right:13px;
   }
 
   .message{
-    max-width:90%;
+    max-width:88%;
+    font-size:15.5px;
   }
 
-  .chat-area{
-    padding-left:12px;
-    padding-right:12px;
+  .input-area{
+    padding:8px 8px 12px;
   }
 
-  .side-menu{
-    width:285px;
+  .input-box{
+    border-radius:20px;
+  }
+
+  .welcome h1{
+    font-size:25px;
   }
 }
 </style>
@@ -746,177 +736,267 @@ svg{
 
 <body>
 
-<div class="login-screen" id="loginScreen">
+<!-- ================= AUTH ================= -->
 
-  <div class="login-box">
+<div class="auth-screen" id="authScreen">
 
-    <div class="login-logo">P</div>
+  <div class="auth-box">
 
-    <div class="login-title" id="authTitle">
-      Welcome to P-GPT
+    <div class="auth-logo">P-GPT</div>
+
+    <div class="auth-subtitle">
+      Your AI assistant
     </div>
 
-    <div class="login-subtitle" id="authSubtitle">
-      Login to continue to P-GPT
-    </div>
+    <!-- LOGIN -->
 
-    <input
-      class="login-input"
-      id="emailInput"
-      type="email"
-      placeholder="Email"
-      autocomplete="email"
-    >
+    <div class="auth-form" id="loginForm">
 
-    <input
-      class="login-input"
-      id="passwordInput"
-      type="password"
-      placeholder="Password"
-      autocomplete="current-password"
-    >
+      <div class="auth-title">Login</div>
 
-    <button class="login-btn" id="authBtn">
-      Login
-    </button>
+      <label class="auth-label">Email</label>
 
-    <div class="switch-auth">
-      <span id="switchText">
-        Don't have an account?
-      </span>
+      <input
+        class="auth-input"
+        id="loginEmail"
+        type="email"
+        autocomplete="email"
+        placeholder="Enter your email"
+      >
 
-      <button id="switchBtn">
-        Sign Up
+      <label class="auth-label">Password</label>
+
+      <input
+        class="auth-input"
+        id="loginPassword"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Enter your password"
+      >
+
+      <button class="auth-button" id="loginBtn">
+        LOGIN
       </button>
+
+      <div class="auth-error" id="loginError"></div>
+
+      <div class="auth-switch">
+        Don't have an account?
+        <button id="showSignup">Sign Up</button>
+      </div>
+
+    </div>
+
+    <!-- SIGNUP -->
+
+    <div class="auth-form hidden" id="signupForm">
+
+      <div class="auth-title">Create Account</div>
+
+      <label class="auth-label">Name</label>
+
+      <input
+        class="auth-input"
+        id="signupName"
+        type="text"
+        autocomplete="name"
+        placeholder="Enter your name"
+      >
+
+      <label class="auth-label">Email</label>
+
+      <input
+        class="auth-input"
+        id="signupEmail"
+        type="email"
+        autocomplete="email"
+        placeholder="Enter your email"
+      >
+
+      <label class="auth-label">Password</label>
+
+      <input
+        class="auth-input"
+        id="signupPassword"
+        type="password"
+        autocomplete="new-password"
+        placeholder="Create a password"
+      >
+
+      <label class="auth-label">Confirm Password</label>
+
+      <input
+        class="auth-input"
+        id="signupConfirm"
+        type="password"
+        autocomplete="new-password"
+        placeholder="Confirm your password"
+      >
+
+      <button class="auth-button" id="signupBtn">
+        CREATE ACCOUNT
+      </button>
+
+      <div class="auth-error" id="signupError"></div>
+
+      <div class="auth-switch">
+        Already have an account?
+        <button id="showLogin">Login</button>
+      </div>
+
     </div>
 
   </div>
-
 </div>
 
 
-<div class="app" id="app">
+<!-- ================= APP ================= -->
 
-  <header class="header">
+<div class="app hidden" id="app">
 
-    <div class="header-left">
+  <!-- TOPBAR -->
 
-      <button class="icon-btn" id="menuBtn" aria-label="Menu">
+  <div class="topbar">
+
+    <div class="top-left">
+
+      <button class="icon-btn" id="menuBtn" title="Menu">
+
         <svg viewBox="0 0 24 24">
           <path d="M4 7h16"/>
           <path d="M4 12h16"/>
           <path d="M4 17h16"/>
         </svg>
-      </button>
 
-      <div class="header-title">
-        P-GPT
-      </div>
+      </button>
 
     </div>
 
-    <div class="header-right">
+    <div class="logo-title">
+      P-GPT
+    </div>
 
-      <button class="icon-btn" id="newChatBtn" aria-label="New Chat">
+    <div class="top-right">
+
+      <button class="icon-btn" id="newChatBtn" title="New chat">
+
         <svg viewBox="0 0 24 24">
           <path d="M12 20h9"/>
           <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"/>
         </svg>
+
       </button>
 
-      <button class="icon-btn" id="topMoreBtn" aria-label="More">
+      <button class="icon-btn" id="moreBtn" title="More">
+
         <svg viewBox="0 0 24 24">
           <circle cx="5" cy="12" r="1"/>
           <circle cx="12" cy="12" r="1"/>
           <circle cx="19" cy="12" r="1"/>
         </svg>
+
       </button>
 
     </div>
 
-  </header>
+  </div>
 
 
-  <main class="chat-area" id="chatArea">
+  <!-- CHAT -->
+
+  <div class="chat" id="chat">
 
     <div class="welcome" id="welcome">
-      <div>
-        How can I help you?
-      </div>
+
+      <h1>How can I help you?</h1>
+
+      <p>Ask anything to P-GPT</p>
+
     </div>
 
-  </main>
+  </div>
 
+
+  <!-- FILE MENU -->
+
+  <div class="file-panel hidden" id="filePanel">
+
+    <button class="file-option" id="photoBtn">
+
+      <svg viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="16" rx="2"/>
+        <circle cx="8.5" cy="9" r="1.5"/>
+        <path d="m21 15-5-5L5 20"/>
+      </svg>
+
+      Photo
+
+    </button>
+
+    <button class="file-option" id="fileBtn">
+
+      <svg viewBox="0 0 24 24">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/>
+        <path d="M14 2v6h6"/>
+        <path d="M8 13h8"/>
+        <path d="M8 17h6"/>
+      </svg>
+
+      File
+
+    </button>
+
+  </div>
+
+
+  <!-- INPUT -->
 
   <div class="input-area">
 
     <div class="input-box">
 
-      <button
-        class="input-btn"
-        id="plusBtn"
-        aria-label="Add"
-      >
+      <button class="input-btn" id="plusBtn" title="Add">
+
         <svg viewBox="0 0 24 24">
           <path d="M12 5v14"/>
           <path d="M5 12h14"/>
         </svg>
+
       </button>
 
-      <input
-        class="input"
+      <textarea
         id="messageInput"
-        type="text"
-        placeholder="Message P-GPT..."
-        autocomplete="off"
-      >
+        rows="1"
+        placeholder="Reply To P-GPT"
+      ></textarea>
 
-      <button
-        class="input-btn"
-        id="liveVoiceBtn"
-        aria-label="Live Voice"
-      >
-        <svg viewBox="0 0 24 24">
-          <path d="M12 3a9 9 0 1 0 9 9"/>
-          <path d="M12 7a5 5 0 1 0 5 5"/>
-          <circle
-            cx="12"
-            cy="12"
-            r="1.5"
-            fill="currentColor"
-            stroke="none"
-          />
-        </svg>
-      </button>
+      <button class="input-btn" id="voiceBtn" title="Voice">
 
-      <button
-        class="input-btn send-btn"
-        id="sendBtn"
-        aria-label="Send"
-      >
         <svg viewBox="0 0 24 24">
-          <path d="m22 2-7 20-4-9-9-4Z"/>
-          <path d="M22 2 11 13"/>
-        </svg>
-      </button>
-
-      <button
-        class="input-btn"
-        id="voiceBtn"
-        aria-label="Voice"
-      >
-        <svg viewBox="0 0 24 24">
-          <rect
-            x="9"
-            y="3"
-            width="6"
-            height="12"
-            rx="3"
-          />
+          <rect x="9" y="3" width="6" height="12" rx="3"/>
           <path d="M5 11a7 7 0 0 0 14 0"/>
           <path d="M12 18v3"/>
-          <path d="M9 21h6"/>
+          <path d="M8 21h8"/>
         </svg>
+
+      </button>
+
+      <button class="input-btn" id="liveBtn" title="Live">
+
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="8"/>
+          <path d="M10 9l5 3-5 3Z"/>
+        </svg>
+
+      </button>
+
+      <button class="input-btn send-btn" id="sendBtn" title="Send">
+
+        <svg viewBox="0 0 24 24">
+          <path d="M12 19V5"/>
+          <path d="M6 11l6-6 6 6"/>
+        </svg>
+
       </button>
 
     </div>
@@ -926,408 +1006,155 @@ svg{
 </div>
 
 
-<div class="overlay" id="overlay"></div>
+<!-- ================= SIDE MENU ================= -->
 
-<aside class="side-menu" id="sideMenu">
+<div class="menu-overlay hidden" id="menuOverlay"></div>
 
-  <div class="menu-logo">
+<div class="side-menu" id="sideMenu">
 
-    <div class="menu-logo-p">
-      P
+  <div class="menu-header">
+
+    <div class="menu-brand">
+      P-GPT
     </div>
 
-    <span>P-GPT</span>
+    <button class="icon-btn" id="closeMenuBtn">
+
+      <svg viewBox="0 0 24 24">
+        <path d="M6 6l12 12"/>
+        <path d="M18 6 6 18"/>
+      </svg>
+
+    </button>
 
   </div>
 
-  <button class="menu-item" id="menuSearch">
-    <svg viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="7"/>
-      <path d="m20 20-4-4"/>
-    </svg>
-    <span>Search</span>
-  </button>
-
   <button class="menu-item" id="menuNewChat">
+
     <svg viewBox="0 0 24 24">
       <path d="M12 20h9"/>
       <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"/>
     </svg>
-    <span>New Chat</span>
+
+    New Chat
+
   </button>
 
   <button class="menu-item" id="menuHistory">
+
     <svg viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="9"/>
+      <path d="M3 12a9 9 0 1 0 3-6.7"/>
+      <path d="M3 4v5h5"/>
       <path d="M12 7v5l3 2"/>
     </svg>
-    <span>Chat History</span>
+
+    Chat History
+
   </button>
 
-  <div class="menu-divider"></div>
+  <button class="menu-item" id="menuLogout">
 
-  <button class="menu-item" id="menuSettings">
-    <svg viewBox="0 0 24 24">
-      <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/>
-      <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.4 1.4-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6V20h-2v-.2a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L9 17.1l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H7v-2h.2a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L8.4 9l1.4-1.4.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.6V6h2v.2a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L20.2 9l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v2h-.2a1.7 1.7 0 0 0-1.6 1Z"/>
-    </svg>
-    <span>Settings</span>
-  </button>
-
-  <button class="menu-item" id="menuHelp">
-    <svg viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="9"/>
-      <path d="M9.5 9a2.5 2.5 0 1 1 4.2 1.8c-.9.7-1.7 1.1-1.7 2.2"/>
-      <path d="M12 17h.01"/>
-    </svg>
-    <span>Help</span>
-  </button>
-
-  <div class="menu-divider"></div>
-
-  <button class="menu-item" id="menuAccount">
-    <svg viewBox="0 0 24 24">
-      <circle cx="12" cy="8" r="4"/>
-      <path d="M4 21a8 8 0 0 1 16 0"/>
-    </svg>
-    <span>Account</span>
-  </button>
-
-  <button class="menu-item" id="logoutBtn">
     <svg viewBox="0 0 24 24">
       <path d="M10 17l5-5-5-5"/>
       <path d="M15 12H3"/>
-      <path d="M21 19V5a2 2 0 0 0-2-2h-6"/>
+      <path d="M21 3v18"/>
     </svg>
-    <span>Logout</span>
+
+    Logout
+
   </button>
 
-</aside>
+  <div class="menu-user" id="menuUser">
+    Not logged in
+  </div>
+
+</div>
 
 
-<div class="more-menu" id="topMoreMenu">
+<!-- ================= MORE MENU ================= -->
 
-  <button class="more-item" id="moreNewChat">
-    New Chat
+<div class="more-menu hidden" id="moreMenu">
+
+  <button class="more-item" id="clearChatBtn">
+
+    <svg viewBox="0 0 24 24">
+      <path d="M4 7h16"/>
+      <path d="M10 11v6"/>
+      <path d="M14 11v6"/>
+      <path d="M6 7l1 14h10l1-14"/>
+      <path d="M9 7V4h6v3"/>
+    </svg>
+
+    Clear Chat
+
   </button>
 
-  <button class="more-item" id="moreSearch">
-    Search
-  </button>
+  <button class="more-item" id="logoutBtn">
 
-  <button class="more-item" id="moreHistory">
-    Chat History
-  </button>
+    <svg viewBox="0 0 24 24">
+      <path d="M10 17l5-5-5-5"/>
+      <path d="M15 12H3"/>
+      <path d="M21 3v18"/>
+    </svg>
 
-  <button class="more-item" id="moreSettings">
-    Settings
+    Logout
+
   </button>
 
 </div>
 
 
-<section class="page" id="searchPage">
+<!-- ================= LIVE ================= -->
 
-  <div class="page-header">
+<div class="live-panel hidden" id="livePanel">
 
-    <button class="icon-btn pageBack">
+  <div class="live-title">
+    P-GPT Live
+  </div>
+
+  <div class="live-circle">
+
+    <svg viewBox="0 0 24 24">
+      <rect x="9" y="3" width="6" height="12" rx="3"/>
+      <path d="M5 11a7 7 0 0 0 14 0"/>
+      <path d="M12 18v3"/>
+      <path d="M8 21h8"/>
+    </svg>
+
+  </div>
+
+  <div class="live-status" id="liveStatus">
+    Tap microphone to speak
+  </div>
+
+  <div class="live-controls">
+
+    <button class="live-control" id="liveMicBtn" title="Microphone">
+
       <svg viewBox="0 0 24 24">
-        <path d="m15 18-6-6 6-6"/>
+        <rect x="9" y="3" width="6" height="12" rx="3"/>
+        <path d="M5 11a7 7 0 0 0 14 0"/>
+        <path d="M12 18v3"/>
+        <path d="M8 21h8"/>
       </svg>
+
     </button>
 
-    <span>Search</span>
-
-  </div>
-
-  <div class="page-content">
-
-    <div class="search-box">
+    <button class="live-control live-end" id="liveEndBtn" title="End">
 
       <svg viewBox="0 0 24 24">
-        <circle cx="11" cy="11" r="7"/>
-        <path d="m20 20-4-4"/>
+        <path d="M6 6l12 12"/>
+        <path d="M18 6 6 18"/>
       </svg>
 
-      <input
-        id="searchInput"
-        type="text"
-        placeholder="Search chats..."
-      >
-
-    </div>
-
-    <div class="section-title">
-      Recent chats
-    </div>
-
-    <div class="history-item">
-      Artificial Intelligence
-    </div>
-
-    <div class="history-item">
-      How to make a website
-    </div>
-
-    <div class="history-item">
-      Photo editing
-    </div>
-
-  </div>
-
-</section>
-
-
-<section class="page" id="historyPage">
-
-  <div class="page-header">
-
-    <button class="icon-btn pageBack">
-      <svg viewBox="0 0 24 24">
-        <path d="m15 18-6-6 6-6"/>
-      </svg>
-    </button>
-
-    <span>Chat History</span>
-
-  </div>
-
-  <div class="page-content">
-
-    <div class="section-title">
-      Today
-    </div>
-
-    <div class="history-item">
-      Artificial Intelligence
-    </div>
-
-    <div class="history-item">
-      How to make a website
-    </div>
-
-    <div class="history-item">
-      Photo editing
-    </div>
-
-    <div class="section-title" style="margin-top:25px;">
-      Yesterday
-    </div>
-
-    <div class="history-item">
-      Phone comparison
-    </div>
-
-    <div class="history-item">
-      P-GPT settings
-    </div>
-
-  </div>
-
-</section>
-
-
-<section class="page" id="settingsPage">
-
-  <div class="page-header">
-
-    <button class="icon-btn pageBack">
-      <svg viewBox="0 0 24 24">
-        <path d="m15 18-6-6 6-6"/>
-      </svg>
-    </button>
-
-    <span>Settings</span>
-
-  </div>
-
-  <div class="page-content">
-
-    <div class="setting-group">
-      <div class="setting-title">
-        Account
-      </div>
-
-      <div class="setting-item">
-        <span>Email / Account</span>
-        <span class="setting-right">›</span>
-      </div>
-    </div>
-
-    <div class="setting-group">
-      <div class="setting-title">
-        Appearance
-      </div>
-
-      <div class="setting-item">
-        <span>Dark Mode</span>
-        <span class="setting-right">On</span>
-      </div>
-    </div>
-
-    <div class="setting-group">
-      <div class="setting-title">
-        Chat
-      </div>
-
-      <div class="setting-item">
-        <span>Enter to send</span>
-        <span class="setting-right">On</span>
-      </div>
-    </div>
-
-    <div class="setting-group">
-      <div class="setting-title">
-        Voice
-      </div>
-
-      <div class="setting-item">
-        <span>Voice settings</span>
-        <span class="setting-right">›</span>
-      </div>
-    </div>
-
-    <div class="setting-group">
-      <div class="setting-title">
-        Language
-      </div>
-
-      <div class="setting-item">
-        <span>Language</span>
-        <span class="setting-right">English</span>
-      </div>
-    </div>
-
-    <div class="setting-group">
-      <div class="setting-title">
-        About P-GPT
-      </div>
-
-      <div class="setting-item">
-        <span>Version</span>
-        <span class="setting-right">1.0</span>
-      </div>
-    </div>
-
-  </div>
-
-</section>
-
-
-<section class="page" id="helpPage">
-
-  <div class="page-header">
-
-    <button class="icon-btn pageBack">
-      <svg viewBox="0 0 24 24">
-        <path d="m15 18-6-6 6-6"/>
-      </svg>
-    </button>
-
-    <span>Help</span>
-
-  </div>
-
-  <div class="page-content">
-
-    <div class="help-item">
-      How to use P-GPT
-    </div>
-
-    <div class="help-item">
-      Send a message
-    </div>
-
-    <div class="help-item">
-      Use Voice
-    </div>
-
-    <div class="help-item">
-      Use Live Voice
-    </div>
-
-    <div class="help-item">
-      Upload Photos
-    </div>
-
-    <div class="help-item">
-      Upload Files
-    </div>
-
-    <div class="help-item">
-      Manage Chats
-    </div>
-
-    <div class="help-item">
-      Contact Support
-    </div>
-
-  </div>
-
-</section>
-
-
-<section class="page" id="accountPage">
-
-  <div class="page-header">
-
-    <button class="icon-btn pageBack">
-      <svg viewBox="0 0 24 24">
-        <path d="m15 18-6-6 6-6"/>
-      </svg>
-    </button>
-
-    <span>Account</span>
-
-  </div>
-
-  <div class="page-content">
-
-    <div class="account-card">
-
-      <div class="account-avatar">
-        P
-      </div>
-
-      <div>
-        P-GPT User
-      </div>
-
-      <div class="account-email" id="accountEmail">
-        user@example.com
-      </div>
-
-    </div>
-
-    <button class="logout-btn" id="accountLogout">
-      Logout
     </button>
 
   </div>
-
-</section>
-
-
-<div
-  class="more-menu"
-  id="addMenu"
-  style="left:12px;right:auto;top:auto;bottom:72px;"
->
-
-  <button class="more-item" id="cameraBtn">
-    Camera
-  </button>
-
-  <button class="more-item" id="photoBtn">
-    Photo
-  </button>
-
-  <button class="more-item" id="fileBtn">
-    Files
-  </button>
 
 </div>
 
+
+<!-- FILE INPUTS -->
 
 <input
   type="file"
@@ -1343,102 +1170,53 @@ svg{
 >
 
 
-<section class="voice-page" id="voicePage">
-
-  <div class="voice-header">
-    P-GPT Live Voice
-  </div>
-
-  <div class="voice-content">
-
-    <div class="voice-circle">
-
-      <svg viewBox="0 0 24 24">
-        <rect
-          x="9"
-          y="3"
-          width="6"
-          height="12"
-          rx="3"
-        />
-
-        <path d="M5 11a7 7 0 0 0 14 0"/>
-
-        <path d="M12 18v3"/>
-
-        <path d="M9 21h6"/>
-      </svg>
-
-    </div>
-
-    <div class="voice-status" id="voiceStatus">
-      Listening...
-    </div>
-
-    <div class="voice-text" id="voiceText">
-      Speak to P-GPT
-    </div>
-
-    <button class="voice-stop" id="voiceStop">
-
-      <svg viewBox="0 0 24 24">
-        <rect
-          x="7"
-          y="7"
-          width="10"
-          height="10"
-          rx="2"
-        />
-      </svg>
-
-    </button>
-
-  </div>
-
-</section>
-
+<!-- TOAST -->
 
 <div class="toast" id="toast"></div>
 
 
 <script>
 
-/* =====================================================
-   ELEMENTS
-===================================================== */
+/* =========================================================
+   P-GPT CONFIG
+   ========================================================= */
 
-const loginScreen =
-  document.getElementById("loginScreen");
+/*
+   IMPORTANT:
+   Replace this with your Cloudflare Worker URL.
+
+   Example:
+   const API_BASE =
+   "https://p-gpt-api.example.workers.dev";
+*/
+
+const API_BASE = "https://YOUR-WORKER-URL.workers.dev";
+
+
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
+
+const authScreen =
+  document.getElementById("authScreen");
 
 const app =
   document.getElementById("app");
 
-const emailInput =
-  document.getElementById("emailInput");
+const loginForm =
+  document.getElementById("loginForm");
 
-const passwordInput =
-  document.getElementById("passwordInput");
+const signupForm =
+  document.getElementById("signupForm");
 
-const authBtn =
-  document.getElementById("authBtn");
+const loginError =
+  document.getElementById("loginError");
 
-const switchBtn =
-  document.getElementById("switchBtn");
+const signupError =
+  document.getElementById("signupError");
 
-const authTitle =
-  document.getElementById("authTitle");
-
-const authSubtitle =
-  document.getElementById("authSubtitle");
-
-const switchText =
-  document.getElementById("switchText");
-
-const chatArea =
-  document.getElementById("chatArea");
-
-const welcome =
-  document.getElementById("welcome");
+const chat =
+  document.getElementById("chat");
 
 const input =
   document.getElementById("messageInput");
@@ -1446,37 +1224,22 @@ const input =
 const sendBtn =
   document.getElementById("sendBtn");
 
-const voiceBtn =
-  document.getElementById("voiceBtn");
+const filePanel =
+  document.getElementById("filePanel");
 
-const liveVoiceBtn =
-  document.getElementById("liveVoiceBtn");
+const livePanel =
+  document.getElementById("livePanel");
 
-const plusBtn =
-  document.getElementById("plusBtn");
+const liveStatus =
+  document.getElementById("liveStatus");
 
 const toast =
   document.getElementById("toast");
 
-const sideMenu =
-  document.getElementById("sideMenu");
 
-const overlay =
-  document.getElementById("overlay");
-
-const topMoreMenu =
-  document.getElementById("topMoreMenu");
-
-const addMenu =
-  document.getElementById("addMenu");
-
-let isSignup = false;
-let liveRecognition = null;
-
-
-/* =====================================================
+/* =========================================================
    TOAST
-===================================================== */
+   ========================================================= */
 
 function showToast(message){
 
@@ -1484,512 +1247,395 @@ function showToast(message){
 
   toast.classList.add("show");
 
-  setTimeout(()=>{
+  setTimeout(function(){
+
     toast.classList.remove("show");
-  },1800);
+
+  },2200);
 
 }
 
 
-/* =====================================================
-   LOGIN
-===================================================== */
+/* =========================================================
+   AUTH SCREEN
+   ========================================================= */
 
-function checkLogin(){
+function showLogin(){
 
-  const loggedIn =
-    localStorage.getItem("pgpt_logged_in");
+  signupForm.classList.add("hidden");
+  loginForm.classList.remove("hidden");
 
-  if(loggedIn === "true"){
-
-    loginScreen.style.display = "none";
-    app.style.display = "flex";
-
-  }else{
-
-    loginScreen.style.display = "flex";
-    app.style.display = "none";
-
-  }
+  loginError.textContent = "";
+  signupError.textContent = "";
 
 }
 
-checkLogin();
+
+function showSignup(){
+
+  loginForm.classList.add("hidden");
+  signupForm.classList.remove("hidden");
+
+  loginError.textContent = "";
+  signupError.textContent = "";
+
+}
 
 
-switchBtn.addEventListener("click",()=>{
-
-  isSignup = !isSignup;
-
-  if(isSignup){
-
-    authTitle.textContent =
-      "Create your account";
-
-    authSubtitle.textContent =
-      "Sign up to continue to P-GPT";
-
-    authBtn.textContent =
-      "Sign Up";
-
-    switchText.textContent =
-      "Already have an account?";
-
-    switchBtn.textContent =
-      "Login";
-
-  }else{
-
-    authTitle.textContent =
-      "Welcome to P-GPT";
-
-    authSubtitle.textContent =
-      "Login to continue to P-GPT";
-
-    authBtn.textContent =
-      "Login";
-
-    switchText.textContent =
-      "Don't have an account?";
-
-    switchBtn.textContent =
-      "Sign Up";
-
-  }
-
-});
+document
+  .getElementById("showSignup")
+  .addEventListener("click",showSignup);
 
 
-authBtn.addEventListener("click",()=>{
+document
+  .getElementById("showLogin")
+  .addEventListener("click",showLogin);
 
-  const email =
-    emailInput.value.trim();
 
-  const password =
-    passwordInput.value.trim();
+/* =========================================================
+   API HELPER
+   ========================================================= */
 
-  if(!email || !password){
+async function apiRequest(
+  endpoint,
+  options = {}
+){
 
-    showToast(
-      "Enter email and password"
+  const response =
+    await fetch(
+      API_BASE + endpoint,
+      {
+        credentials:"include",
+        ...options,
+        headers:{
+          "Content-Type":"application/json",
+          ...(options.headers || {})
+        }
+      }
     );
+
+  let data = {};
+
+  try{
+
+    data = await response.json();
+
+  }catch(error){
+
+    data = {};
+
+  }
+
+  if(!response.ok){
+
+    throw new Error(
+      data.error ||
+      "Request failed."
+    );
+
+  }
+
+  return data;
+
+}
+
+
+/* =========================================================
+   CHECK LOGIN
+   ========================================================= */
+
+async function checkSession(){
+
+  /*
+    If Worker is not connected yet,
+    keep the Login screen visible.
+  */
+
+  if(
+    API_BASE.includes("YOUR-WORKER-URL")
+  ){
 
     return;
 
   }
 
-  if(password.length < 6){
+  try{
 
-    showToast(
-      "Password must be at least 6 characters"
+    const data =
+      await apiRequest("/api/me");
+
+    if(data.loggedIn){
+
+      showApp(
+        data.user
+      );
+
+    }
+
+  }catch(error){
+
+    console.log(
+      "Session check:",
+      error.message
     );
-
-    return;
 
   }
 
-  localStorage.setItem(
-    "pgpt_logged_in",
-    "true"
-  );
-
-  localStorage.setItem(
-    "pgpt_user_email",
-    email
-  );
-
-  loginScreen.style.display = "none";
-  app.style.display = "flex";
-
-  document.getElementById(
-    "accountEmail"
-  ).textContent = email;
-
-  showToast(
-    isSignup
-      ? "Account created successfully"
-      : "Login successful"
-  );
-
-});
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-function logout(){
-
-  localStorage.removeItem(
-    "pgpt_logged_in"
-  );
-
-  location.reload();
-
 }
 
-document
-  .getElementById("logoutBtn")
-  .addEventListener("click",logout);
 
-document
-  .getElementById("accountLogout")
-  .addEventListener("click",logout);
+/* =========================================================
+   SHOW APP
+   ========================================================= */
 
+function showApp(user = null){
 
-/* =====================================================
-   SIDE MENU
-===================================================== */
+  authScreen.classList.add("hidden");
 
-function openMenu(){
+  app.classList.remove("hidden");
 
-  sideMenu.classList.add("active");
-  overlay.classList.add("active");
+  if(user){
 
-}
+    document
+      .getElementById("menuUser")
+      .textContent =
+      user.email ||
+      user.name ||
+      "";
 
-function closeMenu(){
-
-  sideMenu.classList.remove("active");
-  overlay.classList.remove("active");
-
-}
-
-document
-  .getElementById("menuBtn")
-  .addEventListener("click",openMenu);
-
-overlay.addEventListener(
-  "click",
-  closeMenu
-);
-
-
-/* =====================================================
-   PAGES
-===================================================== */
-
-const pages = {
-
-  search:
-    document.getElementById("searchPage"),
-
-  history:
-    document.getElementById("historyPage"),
-
-  settings:
-    document.getElementById("settingsPage"),
-
-  help:
-    document.getElementById("helpPage"),
-
-  account:
-    document.getElementById("accountPage")
-
-};
-
-
-function openPage(page){
-
-  closeMenu();
-
-  topMoreMenu.classList.remove("active");
-
-  page.classList.add("active");
-
-}
-
-function closePages(){
-
-  Object.values(pages).forEach(page=>{
-    page.classList.remove("active");
-  });
+  }
 
 }
 
 
-/* MENU ACTIONS */
+/* =========================================================
+   SIGNUP
+   ========================================================= */
 
 document
-  .getElementById("menuSearch")
+  .getElementById("signupBtn")
   .addEventListener(
     "click",
-    ()=>openPage(pages.search)
-  );
+    async function(){
 
-document
-  .getElementById("menuHistory")
-  .addEventListener(
-    "click",
-    ()=>openPage(pages.history)
-  );
+      const name =
+        document
+          .getElementById("signupName")
+          .value
+          .trim();
 
-document
-  .getElementById("menuSettings")
-  .addEventListener(
-    "click",
-    ()=>openPage(pages.settings)
-  );
+      const email =
+        document
+          .getElementById("signupEmail")
+          .value
+          .trim();
 
-document
-  .getElementById("menuHelp")
-  .addEventListener(
-    "click",
-    ()=>openPage(pages.help)
-  );
+      const password =
+        document
+          .getElementById("signupPassword")
+          .value;
 
-document
-  .getElementById("menuAccount")
-  .addEventListener(
-    "click",
-    ()=>{
+      const confirm =
+        document
+          .getElementById("signupConfirm")
+          .value;
 
-      document.getElementById(
-        "accountEmail"
-      ).textContent =
-        localStorage.getItem(
-          "pgpt_user_email"
-        ) || "user@example.com";
+      signupError.textContent = "";
 
-      openPage(pages.account);
+      if(
+        !name ||
+        !email ||
+        !password ||
+        !confirm
+      ){
+
+        signupError.textContent =
+          "Please fill in all fields.";
+
+        return;
+
+      }
+
+      if(password.length < 6){
+
+        signupError.textContent =
+          "Password must be at least 6 characters.";
+
+        return;
+
+      }
+
+      if(password !== confirm){
+
+        signupError.textContent =
+          "Passwords do not match.";
+
+        return;
+
+      }
+
+      try{
+
+        const data =
+          await apiRequest(
+            "/api/signup",
+            {
+              method:"POST",
+              body:JSON.stringify({
+                name,
+                email,
+                password
+              })
+            }
+          );
+
+        showApp(data.user);
+
+        showToast(
+          "Account created"
+        );
+
+      }catch(error){
+
+        signupError.textContent =
+          error.message;
+
+      }
 
     }
   );
 
 
-/* BACK BUTTONS */
+/* =========================================================
+   LOGIN
+   ========================================================= */
 
 document
-  .querySelectorAll(".pageBack")
-  .forEach(btn=>{
+  .getElementById("loginBtn")
+  .addEventListener(
+    "click",
+    async function(){
 
-    btn.addEventListener(
-      "click",
-      closePages
-    );
+      const email =
+        document
+          .getElementById("loginEmail")
+          .value
+          .trim();
 
-  });
+      const password =
+        document
+          .getElementById("loginPassword")
+          .value;
+
+      loginError.textContent = "";
+
+      if(!email || !password){
+
+        loginError.textContent =
+          "Please enter email and password.";
+
+        return;
+
+      }
+
+      try{
+
+        const data =
+          await apiRequest(
+            "/api/login",
+            {
+              method:"POST",
+              body:JSON.stringify({
+                email,
+                password
+              })
+            }
+          );
+
+        showApp(data.user);
+
+        showToast(
+          "Login successful"
+        );
+
+      }catch(error){
+
+        loginError.textContent =
+          error.message;
+
+      }
+
+    }
+  );
 
 
-/* =====================================================
-   NEW CHAT
-===================================================== */
+/* =========================================================
+   LOGOUT
+   ========================================================= */
 
-function newChat(){
+async function logout(){
 
-  chatArea.innerHTML = "";
+  try{
 
-  const newWelcome =
-    document.createElement("div");
+    if(
+      !API_BASE.includes(
+        "YOUR-WORKER-URL"
+      )
+    ){
 
-  newWelcome.className = "welcome";
+      await apiRequest(
+        "/api/logout",
+        {
+          method:"POST"
+        }
+      );
 
-  newWelcome.id = "welcome";
+    }
 
-  newWelcome.innerHTML =
-    "<div>How can I help you?</div>";
+  }catch(error){
 
-  chatArea.appendChild(newWelcome);
+    console.log(error);
 
-  input.value = "";
+  }
 
-  updateInputButtons();
+  app.classList.add("hidden");
 
-  closeMenu();
+  authScreen.classList.remove("hidden");
 
-  topMoreMenu.classList.remove(
-    "active"
+  document
+    .getElementById("moreMenu")
+    .classList.add("hidden");
+
+  closeSideMenu();
+
+  showLogin();
+
+  showToast(
+    "Logged out"
   );
 
 }
 
-document
-  .getElementById("newChatBtn")
-  .addEventListener("click",newChat);
 
 document
-  .getElementById("menuNewChat")
-  .addEventListener("click",newChat);
-
-document
-  .getElementById("moreNewChat")
-  .addEventListener("click",newChat);
-
-
-/* =====================================================
-   TOP MORE
-===================================================== */
-
-document
-  .getElementById("topMoreBtn")
-  .addEventListener("click",(e)=>{
-
-    e.stopPropagation();
-
-    topMoreMenu.classList.toggle(
-      "active"
-    );
-
-  });
-
-
-document.addEventListener("click",(e)=>{
-
-  if(
-    !topMoreMenu.contains(e.target) &&
-    e.target.id !== "topMoreBtn"
-  ){
-
-    topMoreMenu.classList.remove(
-      "active"
-    );
-
-  }
-
-});
-
-
-document
-  .getElementById("moreSearch")
+  .getElementById("logoutBtn")
   .addEventListener(
     "click",
-    ()=>openPage(pages.search)
+    logout
   );
 
+
 document
-  .getElementById("moreHistory")
+  .getElementById("menuLogout")
   .addEventListener(
     "click",
-    ()=>openPage(pages.history)
-  );
-
-document
-  .getElementById("moreSettings")
-  .addEventListener(
-    "click",
-    ()=>openPage(pages.settings)
+    logout
   );
 
 
-/* =====================================================
-   ADD MENU
-===================================================== */
-
-plusBtn.addEventListener("click",(e)=>{
-
-  e.stopPropagation();
-
-  addMenu.classList.toggle(
-    "active"
-  );
-
-});
-
-
-document.addEventListener("click",(e)=>{
-
-  if(
-    !addMenu.contains(e.target) &&
-    e.target !== plusBtn
-  ){
-
-    addMenu.classList.remove(
-      "active"
-    );
-
-  }
-
-});
-
-
-document
-  .getElementById("cameraBtn")
-  .addEventListener("click",()=>{
-
-    addMenu.classList.remove(
-      "active"
-    );
-
-    showToast(
-      "Camera will open here"
-    );
-
-  });
-
-
-document
-  .getElementById("photoBtn")
-  .addEventListener("click",()=>{
-
-    document
-      .getElementById("photoInput")
-      .click();
-
-    addMenu.classList.remove(
-      "active"
-    );
-
-  });
-
-
-document
-  .getElementById("fileBtn")
-  .addEventListener("click",()=>{
-
-    document
-      .getElementById("fileInput")
-      .click();
-
-    addMenu.classList.remove(
-      "active"
-    );
-
-  });
-
-
-/* =====================================================
-   INPUT BUTTONS
-===================================================== */
-
-function updateInputButtons(){
-
-  const hasText =
-    input.value.trim().length > 0;
-
-  if(hasText){
-
-    liveVoiceBtn.style.display =
-      "none";
-
-    sendBtn.style.display =
-      "flex";
-
-  }else{
-
-    liveVoiceBtn.style.display =
-      "flex";
-
-    sendBtn.style.display =
-      "none";
-
-  }
-
-  voiceBtn.style.display =
-    "flex";
-
-}
-
-input.addEventListener(
-  "input",
-  updateInputButtons
-);
-
-updateInputButtons();
-
-
-/* =====================================================
-   SEND MESSAGE — REAL P-GPT AI
-===================================================== */
+/* =========================================================
+   SEND MESSAGE
+   ========================================================= */
 
 async function sendMessage(){
 
@@ -1997,108 +1643,82 @@ async function sendMessage(){
     input.value.trim();
 
   if(!text){
+
     return;
+
   }
 
-  welcome?.remove();
+  const welcome =
+    document.getElementById(
+      "welcome"
+    );
 
-  /* USER MESSAGE */
+  if(welcome){
+
+    welcome.remove();
+
+  }
 
   addUserMessage(text);
 
   input.value = "";
 
-  updateInputButtons();
+  input.style.height =
+    "auto";
 
+  chat.scrollTop =
+    chat.scrollHeight;
 
-  /* ================= THINKING ================= */
-
-  const thinkingRow =
-    document.createElement("div");
-
-  thinkingRow.className =
-    "message-row ai";
-
-  thinkingRow.innerHTML = `
-    <div class="message">
-      <div class="thinking">
-        Thinking<span class="thinking-dots"></span>
-      </div>
-    </div>
-  `;
-
-  chatArea.appendChild(thinkingRow);
-
-  chatArea.scrollTop =
-    chatArea.scrollHeight;
-
-
-  /* ================= REAL AI REQUEST ================= */
+  const loading =
+    addLoadingMessage();
 
   try{
 
-    const response =
-      await fetch(
-        "https://p-gpt-api.pgptai2026.workers.dev",
+    /*
+      REAL AI API
+
+      Worker endpoint:
+      POST /api/chat
+
+      Body:
+      {
+        "message":"Hello"
+      }
+    */
+
+    const data =
+      await apiRequest(
+        "/api/chat",
         {
           method:"POST",
-
-          headers:{
-            "Content-Type":"application/json"
-          },
-
           body:JSON.stringify({
             message:text
           })
         }
       );
 
+    loading.remove();
 
-    const data =
-      await response.json();
-
-
-    /* REMOVE THINKING */
-
-    thinkingRow.remove();
-
-
-    /* API ERROR */
-
-    if(!response.ok){
-
-      addAIMessage(
-        data.error ||
-        "Something went wrong."
-      );
-
-      return;
-    }
-
-
-    /* REAL AI RESPONSE */
+    const answer =
+      data.reply ||
+      data.response ||
+      data.message ||
+      "No response received.";
 
     addAIMessage(
-      data.reply ||
-      "No response received."
+      answer
     );
-
 
   }catch(error){
 
-    /* REMOVE THINKING */
-
-    thinkingRow.remove();
-
-
-    /* CONNECTION ERROR */
+    loading.remove();
 
     addAIMessage(
       "Unable to connect to P-GPT AI."
     );
 
     console.error(
-      "P-GPT Error:",
+      "AI API error:",
       error
     );
 
@@ -2107,22 +1727,284 @@ async function sendMessage(){
 }
 
 
-sendBtn.addEventListener(
-  "click",
-  sendMessage
-);
+/* =========================================================
+   USER MESSAGE
+   ========================================================= */
 
+function addUserMessage(text){
+
+  const row =
+    document.createElement(
+      "div"
+    );
+
+  row.className =
+    "message-row user";
+
+  const message =
+    document.createElement(
+      "div"
+    );
+
+  message.className =
+    "message";
+
+  message.textContent =
+    text;
+
+  row.appendChild(
+    message
+  );
+
+  chat.appendChild(
+    row
+  );
+
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+function addLoadingMessage(){
+
+  const row =
+    document.createElement(
+      "div"
+    );
+
+  row.className =
+    "message-row ai";
+
+  row.innerHTML = `
+    <div class="ai-loading">
+      <span class="loading-dot"></span>
+      <span class="loading-dot"></span>
+      <span class="loading-dot"></span>
+    </div>
+  `;
+
+  chat.appendChild(
+    row
+  );
+
+  chat.scrollTop =
+    chat.scrollHeight;
+
+  return row;
+
+}
+
+
+/* =========================================================
+   AI MESSAGE
+   ========================================================= */
+
+function addAIMessage(text){
+
+  const row =
+    document.createElement(
+      "div"
+    );
+
+  row.className =
+    "message-row ai";
+
+  const wrapper =
+    document.createElement(
+      "div"
+    );
+
+  const message =
+    document.createElement(
+      "div"
+    );
+
+  message.className =
+    "message";
+
+  message.textContent =
+    text;
+
+  wrapper.appendChild(
+    message
+  );
+
+
+  const tools =
+    document.createElement(
+      "div"
+    );
+
+  tools.className =
+    "ai-tools";
+
+
+  tools.innerHTML = `
+
+    <button
+      class="tool-btn copy-btn"
+      title="Copy"
+    >
+      <svg viewBox="0 0 24 24">
+        <rect
+          x="9"
+          y="9"
+          width="11"
+          height="11"
+          rx="2"
+        />
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+      </svg>
+    </button>
+
+
+    <button
+      class="tool-btn speak-btn"
+      title="Read aloud"
+    >
+      <svg viewBox="0 0 24 24">
+        <path d="M11 5 6 9H3v6h3l5 4V5Z"/>
+        <path d="M15 9a4 4 0 0 1 0 6"/>
+        <path d="M18 6a8 8 0 0 1 0 12"/>
+      </svg>
+    </button>
+
+
+    <button
+      class="tool-btn share-btn"
+      title="Share"
+    >
+      <svg viewBox="0 0 24 24">
+        <circle cx="18" cy="5" r="2"/>
+        <circle cx="6" cy="12" r="2"/>
+        <circle cx="18" cy="19" r="2"/>
+        <path d="m8 11 8-5"/>
+        <path d="m8 13 8 5"/>
+      </svg>
+    </button>
+
+  `;
+
+  wrapper.appendChild(
+    tools
+  );
+
+  row.appendChild(
+    wrapper
+  );
+
+  chat.appendChild(
+    row
+  );
+
+
+  /* COPY */
+
+  tools
+    .querySelector(".copy-btn")
+    .addEventListener(
+      "click",
+      async function(){
+
+        try{
+
+          await navigator
+            .clipboard
+            .writeText(text);
+
+          showToast(
+            "Copied"
+          );
+
+        }catch(error){
+
+          showToast(
+            "Copy failed"
+          );
+
+        }
+
+      }
+    );
+
+
+  /* SPEAK */
+
+  tools
+    .querySelector(".speak-btn")
+    .addEventListener(
+      "click",
+      function(){
+
+        speakText(text);
+
+      }
+    );
+
+
+  /* SHARE */
+
+  tools
+    .querySelector(".share-btn")
+    .addEventListener(
+      "click",
+      async function(){
+
+        try{
+
+          if(
+            navigator.share
+          ){
+
+            await navigator.share({
+              title:"P-GPT",
+              text:text
+            });
+
+          }else{
+
+            await navigator
+              .clipboard
+              .writeText(text);
+
+            showToast(
+              "Copied"
+            );
+
+          }
+
+        }catch(error){
+
+          console.log(error);
+
+        }
+
+      }
+    );
+
+
+  chat.scrollTop =
+    chat.scrollHeight;
+
+}
+
+
+/* =========================================================
+   ENTER
+   ========================================================= */
 
 input.addEventListener(
   "keydown",
-  (e)=>{
+  function(event){
 
     if(
-      e.key === "Enter" &&
-      !e.shiftKey
+      event.key === "Enter" &&
+      !event.shiftKey
     ){
 
-      e.preventDefault();
+      event.preventDefault();
 
       sendMessage();
 
@@ -2132,185 +2014,281 @@ input.addEventListener(
 );
 
 
-/* =====================================================
-   USER MESSAGE
-===================================================== */
+/* =========================================================
+   SEND
+   ========================================================= */
 
-function addUserMessage(text){
+sendBtn.addEventListener(
+  "click",
+  sendMessage
+);
 
-  const row =
-    document.createElement("div");
 
-  row.className =
-    "message-row user";
+/* =========================================================
+   AUTO RESIZE
+   ========================================================= */
 
-  const message =
-    document.createElement("div");
+input.addEventListener(
+  "input",
+  function(){
 
-  message.className =
-    "message";
+    this.style.height =
+      "auto";
 
-  const bubble =
-    document.createElement("div");
+    this.style.height =
+      Math.min(
+        this.scrollHeight,
+        130
+      ) + "px";
 
-  bubble.className =
-    "user-bubble";
+  }
+);
 
-  bubble.textContent =
-    text;
 
-  message.appendChild(bubble);
+/* =========================================================
+   NEW CHAT
+   ========================================================= */
 
-  row.appendChild(message);
+function newChat(){
 
-  chatArea.appendChild(row);
+  chat.innerHTML = `
+    <div
+      class="welcome"
+      id="welcome"
+    >
+      <h1>How can I help you?</h1>
+      <p>Ask anything to P-GPT</p>
+    </div>
+  `;
 
-  chatArea.scrollTop =
-    chatArea.scrollHeight;
+  input.value = "";
+
+  input.style.height =
+    "auto";
 
 }
 
 
-/* =====================================================
-   AI MESSAGE
-===================================================== */
-
-function addAIMessage(text){
-
-  const row =
-    document.createElement("div");
-
-  row.className =
-    "message-row ai";
-
-  const message =
-    document.createElement("div");
-
-  message.className =
-    "message";
-
-  const aiText =
-    document.createElement("div");
-
-  aiText.className =
-    "ai-text";
-
-  aiText.textContent =
-    text;
-
-  message.appendChild(aiText);
-
-
-  /* MESSAGE ACTIONS */
-
-  const actions =
-    document.createElement("div");
-
-  actions.className =
-    "message-actions";
-
-
-  /* COPY */
-
-  const copy =
-    createActionButton(
-      "Copy",
-      `
-      <svg viewBox="0 0 24 24">
-        <rect x="9" y="9" width="11" height="11" rx="2"/>
-        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-      </svg>
-      `
-    );
-
-  copy.addEventListener(
+document
+  .getElementById("newChatBtn")
+  .addEventListener(
     "click",
-    ()=>{
+    newChat
+  );
 
-      navigator.clipboard
-        ?.writeText(text);
 
-      showToast("Copied");
+document
+  .getElementById("menuNewChat")
+  .addEventListener(
+    "click",
+    function(){
+
+      newChat();
+
+      closeSideMenu();
 
     }
   );
 
 
-  /* LIKE */
+/* =========================================================
+   MENU
+   ========================================================= */
 
-  const like =
-    createActionButton(
-      "Like",
-      `
-      <svg viewBox="0 0 24 24">
-        <path d="M7 10v10H4a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2h3Z"/>
-        <path d="M7 20h9.5a2 2 0 0 0 1.9-1.4l2-6A2 2 0 0 0 18.5 10H15l.8-4.1A2.4 2.4 0 0 0 13.4 3L7 10"/>
-      </svg>
-      `
-    );
+const sideMenu =
+  document.getElementById(
+    "sideMenu"
+  );
 
-  like.addEventListener(
-    "click",
-    ()=>showToast("Liked")
+const menuOverlay =
+  document.getElementById(
+    "menuOverlay"
   );
 
 
-  /* DISLIKE */
+function openSideMenu(){
 
-  const dislike =
-    createActionButton(
-      "Dislike",
-      `
-      <svg viewBox="0 0 24 24">
-        <path d="M7 14V4H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h3Z"/>
-        <path d="M7 4h9.5a2 2 0 0 1 1.9 1.4l2 6A2 2 0 0 1 18.5 14H15l.8 4.1A2.4 2.4 0 0 1 13.4 21L7 14"/>
-      </svg>
-      `
-    );
+  sideMenu.classList.add(
+    "open"
+  );
 
-  dislike.addEventListener(
+  menuOverlay.classList.remove(
+    "hidden"
+  );
+
+}
+
+
+function closeSideMenu(){
+
+  sideMenu.classList.remove(
+    "open"
+  );
+
+  menuOverlay.classList.add(
+    "hidden"
+  );
+
+}
+
+
+document
+  .getElementById("menuBtn")
+  .addEventListener(
     "click",
-    ()=>showToast("Feedback received")
+    openSideMenu
   );
 
 
-  /* SPEAKER */
-
-  const speaker =
-    createActionButton(
-      "Speaker",
-      `
-      <svg viewBox="0 0 24 24">
-        <path d="M4 10v4h4l5 4V6l-5 4H4Z"/>
-        <path d="M16 9a5 5 0 0 1 0 6"/>
-        <path d="M18.5 6.5a9 9 0 0 1 0 11"/>
-      </svg>
-      `
-    );
-
-  speaker.addEventListener(
+document
+  .getElementById("closeMenuBtn")
+  .addEventListener(
     "click",
-    ()=>{
+    closeSideMenu
+  );
+
+
+menuOverlay
+  .addEventListener(
+    "click",
+    closeSideMenu
+  );
+
+
+/* =========================================================
+   MORE
+   ========================================================= */
+
+const moreMenu =
+  document.getElementById(
+    "moreMenu"
+  );
+
+
+document
+  .getElementById("moreBtn")
+  .addEventListener(
+    "click",
+    function(event){
+
+      event.stopPropagation();
+
+      moreMenu.classList.toggle(
+        "hidden"
+      );
+
+    }
+  );
+
+
+document
+  .getElementById("clearChatBtn")
+  .addEventListener(
+    "click",
+    function(){
+
+      newChat();
+
+      moreMenu.classList.add(
+        "hidden"
+      );
+
+    }
+  );
+
+
+document.addEventListener(
+  "click",
+  function(event){
+
+    if(
+      !moreMenu.contains(event.target) &&
+      event.target.id !== "moreBtn"
+    ){
+
+      moreMenu.classList.add(
+        "hidden"
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   FILE / PHOTO
+   ========================================================= */
+
+const photoInput =
+  document.getElementById(
+    "photoInput"
+  );
+
+const fileInput =
+  document.getElementById(
+    "fileInput"
+  );
+
+
+document
+  .getElementById("plusBtn")
+  .addEventListener(
+    "click",
+    function(){
+
+      filePanel.classList.toggle(
+        "hidden"
+      );
+
+    }
+  );
+
+
+document
+  .getElementById("photoBtn")
+  .addEventListener(
+    "click",
+    function(){
+
+      photoInput.click();
+
+      filePanel.classList.add(
+        "hidden"
+      );
+
+    }
+  );
+
+
+document
+  .getElementById("fileBtn")
+  .addEventListener(
+    "click",
+    function(){
+
+      fileInput.click();
+
+      filePanel.classList.add(
+        "hidden"
+      );
+
+    }
+  );
+
+
+photoInput
+  .addEventListener(
+    "change",
+    function(){
 
       if(
-        "speechSynthesis" in window
+        this.files &&
+        this.files[0]
       ){
 
-        speechSynthesis.cancel();
-
-        const utterance =
-          new SpeechSynthesisUtterance(
-            text
-          );
-
-        speechSynthesis.speak(
-          utterance
-        );
-
-      }else{
-
         showToast(
-          "Speech not supported"
+          "Photo selected"
         );
 
       }
@@ -2319,408 +2297,278 @@ function addAIMessage(text){
   );
 
 
-  /* SHARE */
-
-  const share =
-    createActionButton(
-      "Share",
-      `
-      <svg viewBox="0 0 24 24">
-        <circle cx="18" cy="5" r="2"/>
-        <circle cx="6" cy="12" r="2"/>
-        <circle cx="18" cy="19" r="2"/>
-        <path d="m8 11 8-5"/>
-        <path d="m8 13 8 5"/>
-      </svg>
-      `
-    );
-
-  share.addEventListener(
-    "click",
-    async ()=>{
+fileInput
+  .addEventListener(
+    "change",
+    function(){
 
       if(
-        navigator.share
+        this.files &&
+        this.files[0]
       ){
+
+        showToast(
+          "File selected"
+        );
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   VOICE INPUT
+   ========================================================= */
+
+const SpeechRecognition =
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
+
+let recognition = null;
+
+if(SpeechRecognition){
+
+  recognition =
+    new SpeechRecognition();
+
+  recognition.lang =
+    "en-US";
+
+  recognition.continuous =
+    false;
+
+  recognition.interimResults =
+    false;
+
+
+  recognition.onstart =
+    function(){
+
+      liveStatus.textContent =
+        "Listening...";
+
+    };
+
+
+  recognition.onresult =
+    function(event){
+
+      const spoken =
+        event
+          .results[0][0]
+          .transcript;
+
+      input.value =
+        spoken;
+
+      input.dispatchEvent(
+        new Event("input")
+      );
+
+      if(
+        !livePanel.classList.contains(
+          "hidden"
+        )
+      ){
+
+        liveStatus.textContent =
+          "Processing...";
+
+      }
+
+      sendMessage();
+
+    };
+
+
+  recognition.onerror =
+    function(){
+
+      liveStatus.textContent =
+        "Microphone error";
+
+      showToast(
+        "Microphone error"
+      );
+
+    };
+
+
+  recognition.onend =
+    function(){
+
+      if(
+        !livePanel.classList.contains(
+          "hidden"
+        )
+      ){
+
+        liveStatus.textContent =
+          "Tap microphone to speak";
+
+      }
+
+    };
+
+}
+
+
+/* NORMAL VOICE */
+
+document
+  .getElementById("voiceBtn")
+  .addEventListener(
+    "click",
+    function(){
+
+      if(!recognition){
+
+        showToast(
+          "Voice recognition is not supported"
+        );
+
+        return;
+
+      }
+
+      try{
+
+        recognition.start();
+
+      }catch(error){
+
+        console.log(error);
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   LIVE
+   ========================================================= */
+
+document
+  .getElementById("liveBtn")
+  .addEventListener(
+    "click",
+    function(){
+
+      livePanel.classList.remove(
+        "hidden"
+      );
+
+      liveStatus.textContent =
+        "Tap microphone to speak";
+
+    }
+  );
+
+
+document
+  .getElementById("liveMicBtn")
+  .addEventListener(
+    "click",
+    function(){
+
+      if(!recognition){
+
+        liveStatus.textContent =
+          "Voice recognition is not supported.";
+
+        return;
+
+      }
+
+      try{
+
+        recognition.start();
+
+      }catch(error){
+
+        console.log(error);
+
+      }
+
+    }
+  );
+
+
+document
+  .getElementById("liveEndBtn")
+  .addEventListener(
+    "click",
+    function(){
+
+      if(recognition){
 
         try{
 
-          await navigator.share({
-            title:"P-GPT",
-            text:text
-          });
+          recognition.stop();
 
-        }catch(e){}
-
-      }else{
-
-        await navigator.clipboard
-          ?.writeText(text);
-
-        showToast(
-          "Copied for sharing"
-        );
+        }catch(error){}
 
       }
 
-    }
-  );
-
-
-  /* MORE */
-
-  const more =
-    createActionButton(
-      "More",
-      `
-      <svg viewBox="0 0 24 24">
-        <circle cx="5" cy="12" r="1"/>
-        <circle cx="12" cy="12" r="1"/>
-        <circle cx="19" cy="12" r="1"/>
-      </svg>
-      `
-    );
-
-  more.addEventListener(
-    "click",
-    ()=>{
-
-      showToast(
-        "More options"
+      livePanel.classList.add(
+        "hidden"
       );
 
+      liveStatus.textContent =
+        "Tap microphone to speak";
+
     }
   );
 
 
-  actions.appendChild(copy);
-  actions.appendChild(like);
-  actions.appendChild(dislike);
-  actions.appendChild(speaker);
-  actions.appendChild(share);
-  actions.appendChild(more);
+/* =========================================================
+   TEXT TO SPEECH
+   ========================================================= */
 
-  message.appendChild(actions);
+function speakText(text){
 
-  row.appendChild(message);
-
-  chatArea.appendChild(row);
-
-  chatArea.scrollTop =
-    chatArea.scrollHeight;
-
-}
-
-
-function createActionButton(
-  label,
-  html
-){
-
-  const button =
-    document.createElement("button");
-
-  button.className =
-    "message-action";
-
-  button.setAttribute(
-    "aria-label",
-    label
-  );
-
-  button.innerHTML =
-    html;
-
-  return button;
-
-}
-
-
-/* =====================================================
-   NORMAL VOICE INPUT
-===================================================== */
-
-voiceBtn.addEventListener(
-  "click",
-  ()=>{
-
-    const SpeechRecognition =
-      window.SpeechRecognition ||
-      window.webkitSpeechRecognition;
-
-    if(!SpeechRecognition){
-
-      showToast(
-        "Voice input not supported"
-      );
-
-      return;
-
-    }
-
-    const recognition =
-      new SpeechRecognition();
-
-    recognition.lang =
-      "en-US";
-
-    recognition.interimResults =
-      false;
-
-    recognition.continuous =
-      false;
+  if(
+    !("speechSynthesis" in window)
+  ){
 
     showToast(
-      "Listening..."
+      "Voice playback is not supported"
     );
-
-    recognition.onresult =
-      (event)=>{
-
-        const transcript =
-          event.results[0][0]
-            .transcript;
-
-        input.value =
-          transcript;
-
-        updateInputButtons();
-
-      };
-
-    recognition.onerror =
-      ()=>{
-
-        showToast(
-          "Voice error"
-        );
-
-      };
-
-    try{
-
-      recognition.start();
-
-    }catch(e){}
-
-  }
-);
-
-
-/* =====================================================
-   LIVE VOICE
-===================================================== */
-
-const voicePage =
-  document.getElementById(
-    "voicePage"
-  );
-
-const voiceStatus =
-  document.getElementById(
-    "voiceStatus"
-  );
-
-const voiceText =
-  document.getElementById(
-    "voiceText"
-  );
-
-const voiceStop =
-  document.getElementById(
-    "voiceStop"
-  );
-
-
-liveVoiceBtn.addEventListener(
-  "click",
-  ()=>{
-
-    voicePage.classList.add(
-      "active"
-    );
-
-    startLiveVoice();
-
-  }
-);
-
-
-function startLiveVoice(){
-
-  const SpeechRecognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
-
-  if(!SpeechRecognition){
-
-    voiceStatus.textContent =
-      "Voice not supported";
-
-    voiceText.textContent =
-      "Your browser does not support live voice.";
 
     return;
 
   }
 
-  voiceStatus.textContent =
-    "Listening...";
+  speechSynthesis.cancel();
 
-  voiceText.textContent =
-    "Speak to P-GPT";
+  const speech =
+    new SpeechSynthesisUtterance(
+      text
+    );
 
-  liveRecognition =
-    new SpeechRecognition();
-
-  liveRecognition.lang =
+  speech.lang =
     "en-US";
 
-  liveRecognition.interimResults =
-    true;
+  speech.rate =
+    1;
 
-  liveRecognition.continuous =
-    true;
+  speech.pitch =
+    1;
 
-
-  liveRecognition.onresult =
-    (event)=>{
-
-      let transcript = "";
-
-      for(
-        let i = event.resultIndex;
-        i < event.results.length;
-        i++
-      ){
-
-        transcript +=
-          event.results[i][0]
-            .transcript;
-
-      }
-
-      voiceText.textContent =
-        transcript || "Listening...";
-
-    };
-
-
-  liveRecognition.onerror =
-    ()=>{
-
-      voiceStatus.textContent =
-        "Voice error";
-
-      voiceText.textContent =
-        "Try again.";
-
-    };
-
-
-  liveRecognition.onend =
-    ()=>{
-
-      if(
-        voicePage.classList.contains(
-          "active"
-        )
-      ){
-
-        try{
-          liveRecognition.start();
-        }catch(e){}
-
-      }
-
-    };
-
-
-  try{
-
-    liveRecognition.start();
-
-  }catch(e){}
-
-}
-
-
-voiceStop.addEventListener(
-  "click",
-  stopLiveVoice
-);
-
-
-function stopLiveVoice(){
-
-  if(liveRecognition){
-
-    liveRecognition.onend =
-      null;
-
-    try{
-
-      liveRecognition.stop();
-
-    }catch(e){}
-
-    liveRecognition =
-      null;
-
-  }
-
-  voicePage.classList.remove(
-    "active"
+  speechSynthesis.speak(
+    speech
   );
 
-  voiceStatus.textContent =
-    "Listening...";
-
-  voiceText.textContent =
-    "Speak to P-GPT";
-
 }
 
 
-/* =====================================================
-   FILE / PHOTO
-===================================================== */
-
-document
-  .getElementById("photoInput")
-  .addEventListener("change",(e)=>{
-
-    if(e.target.files.length){
-
-      showToast(
-        "Photo selected"
-      );
-
-    }
-
-  });
-
-
-document
-  .getElementById("fileInput")
-  .addEventListener("change",(e)=>{
-
-    if(e.target.files.length){
-
-      showToast(
-        "File selected"
-      );
-
-    }
-
-  });
-
-
-/* =====================================================
+/* =========================================================
    START
-===================================================== */
+   ========================================================= */
 
-updateInputButtons();
+checkSession();
 
 </script>
 
