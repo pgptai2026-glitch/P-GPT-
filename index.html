@@ -1,477 +1,1293 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>P-GPT</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P-GPT</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    body {
-      background: #000;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      height: 100vh;
-      overflow: hidden;
-    }
+html,body{
+  width:100%;
+  height:100%;
+  background:#000;
+  color:#fff;
+  font-family:Arial,sans-serif;
+}
 
-    .app {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      max-width: 900px;
-      margin: auto;
-      background: #000;
-    }
+body{
+  overflow:hidden;
+}
 
-    /* TOP BAR */
-    .topbar {
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 16px;
-      border-bottom: 1px solid #222;
-    }
+button{
+  font-family:inherit;
+}
 
-    .icon-btn {
-      width: 42px;
-      height: 42px;
-      border: 0;
-      background: transparent;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      border-radius: 50%;
-    }
+.app{
+  width:100%;
+  height:100vh;
+  max-width:900px;
+  margin:auto;
+  background:#000;
+  display:flex;
+  flex-direction:column;
+}
 
-    .icon-btn:hover {
-      background: #1a1a1a;
-    }
+/* ================= TOP BAR ================= */
 
-    .brand {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: .5px;
-    }
+.topbar{
+  height:60px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 10px;
+  border-bottom:1px solid #222;
+  background:#000;
+}
 
-    .top-actions {
-      display: flex;
-      gap: 2px;
-    }
+.icon-btn{
+  width:42px;
+  height:42px;
+  border:0;
+  background:transparent;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  border-radius:50%;
+  transition:.15s;
+}
 
-    /* CHAT */
-    .chat {
-      flex: 1;
-      overflow-y: auto;
-      padding: 24px 16px 120px;
-    }
+.icon-btn:hover{
+  background:#181818;
+}
 
-    .welcome {
-      min-height: 60vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
+.icon-btn:active{
+  background:#222;
+}
 
-    .welcome h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
+.brand{
+  font-size:20px;
+  font-weight:700;
+  letter-spacing:.5px;
+}
 
-    .welcome p {
-      color: #aaa;
-      font-size: 15px;
-    }
+.top-actions{
+  display:flex;
+  gap:2px;
+}
 
-    .message-row {
-      display: flex;
-      margin: 22px 0;
-    }
+/* ================= CHAT ================= */
 
-    .message-row.user {
-      justify-content: flex-end;
-    }
+.chat{
+  flex:1;
+  overflow-y:auto;
+  padding:20px 16px 130px;
+  scrollbar-width:none;
+}
 
-    .message-row.ai {
-      justify-content: flex-start;
-    }
+.chat::-webkit-scrollbar{
+  display:none;
+}
 
-    .message {
-      max-width: 78%;
-      line-height: 1.55;
-      font-size: 16px;
-    }
+.welcome{
+  min-height:68vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
 
-    .user .message {
-      background: #171717;
-      padding: 12px 15px;
-      border-radius: 18px 18px 4px 18px;
-    }
+.welcome h1{
+  font-size:28px;
+  margin-bottom:8px;
+}
 
-    .ai .message {
-      background: transparent;
-      padding: 4px 0;
-    }
+.welcome p{
+  color:#888;
+  font-size:15px;
+}
 
-    /* SIX BUTTONS */
-    .message-tools {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-top: 8px;
-    }
+/* ================= MESSAGES ================= */
 
-    .tool-btn {
-      width: 34px;
-      height: 34px;
-      border: 0;
-      background: traPtodat: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
+.message-row{
+  display:flex;
+  margin:20px 0;
+}
 
-    .tool-btn:hover {
-      background: #171717;
-    }
+.message-row.user{
+  justify-content:flex-end;
+}
 
-    .tool-btn svg {
-      width: 18px;
-      height: 18px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
+.message-row.ai{
+  justify-content:flex-start;
+}
 
-    /* INPUT */
-    .input-wrap {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(900px, 100%);
-      padding: 12px 14px 18px;
-      background: linear-gradient(transparent, #000 18%);
-    }
+.message-container{
+  max-width:86%;
+}
 
-    .input-box {
-      min-height: 54px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      border: 1px solid #333;
-      border-radius: 28px;
-      padding: 5px 7px 5px 8px;
-      background: #050505;
-    }
+.message{
+  max-width:100%;
+  line-height:1.55;
+  font-size:16px;
+  white-space:pre-wrap;
+  word-wrap:break-word;
+}
 
-    #messageInput {
-      flex: 1;
-      min-width: 0;
-      resize: none;
-      border: 0;
-      outline: none;
-      background: transparent;
-      color: #fff;
-      font-size: 16px;
-      padding: 10px 6px;
-      font-family: inherit;
-      max-height: 120px;
-    }
+.user .message{
+  background:#171717;
+  padding:12px 15px;
+  border-radius:18px 18px 4px 18px;
+}
 
-    #messageInput::placeholder {
-      color: #888;
-    }
+.ai .message{
+  background:transparent;
+  padding:4px 0;
+}
 
-    .input-btn {
-      width: 42px;
-      height: 42px;
-      flex-shrink: 0;
-      border: 0;
-      border-radiu
-      background: transparent;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
+/* ================= SIX BUTTONS ================= */
 
-    .input-btn:hover {
-      background: #1a1a1a;
-    }
+.message-tools{
+  display:flex;
+  align-items:center;
+  gap:3px;
+  margin-top:8px;
+}
 
-    .input-btn svg {
-      width: 21px;
-      height: 21px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
+.tool-btn{
+  width:34px;
+  height:34px;
+  border:0;
+  background:transparent;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  border-radius:8px;
+  transition:.15s;
+}
 
-    .send-btn {
-      background: #fff;
-      color: #000;
-      display: none;
-    }
+.tool-btn:hover{
+  background:#171717;
+}
 
-    .send-btn:hover {
-      background: #ddd;
-    }
+.tool-btn:active{
+  background:#252525;
+  transform:scale(.94);
+}
 
-    .live-btn {
-      border: 1px solid #333;
-    }
+.tool-btn.active{
+  background:#202020;
+}
 
-    /* MOBILE */
-    @media (max-width: 600px) {
-      .topbar {
-        padding: 0 8px;
-      }
+.tool-btn svg{
+  width:18px;
+  height:18px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
 
-      .chat {
-        padding-left: 14px;
-        padding-right: 14px;
-      }
+/* ================= INPUT ================= */
 
-      .message {
-        max-width: 86%;
-      }
+.input-wrap{
+  position:fixed;
+  z-index:20;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(900px,100%);
+  padding:10px 14px 17px;
+  background:linear-gradient(transparent,#000 18%);
+}
 
-      .welcome h1 {
-        font-size: 24px;
-      }
-    }
-  </style>
+.input-box{
+  min-height:54px;
+  display:flex;
+  align-items:center;
+  gap:4px;
+  border:1px solid #333;
+  border-radius:28px;
+  padding:5px 7px 5px 8px;
+  background:#050505;
+}
+
+#messageInput{
+  flex:1;
+  min-width:0;
+  resize:none;
+  border:0;
+  outline:none;
+  background:transparent;
+  color:#fff;
+  font-size:16px;
+  padding:10px 6px;
+  font-family:inherit;
+  max-height:120px;
+}
+
+#messageInput::placeholder{
+  color:#888;
+}
+
+.input-btn{
+  width:42px;
+  height:42px;
+  flex-shrink:0;
+  border:0;
+  border-radius:50%;
+  background:transparent;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:.15s;
+}
+
+.input-btn:hover{
+  background:#1a1a1a;
+}
+
+.input-btn:active{
+  transform:scale(.94);
+}
+
+.input-btn svg{
+  width:21px;
+  height:21px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.send-btn{
+  background:#fff;
+  color:#000;
+  display:none;
+}
+
+.send-btn:hover{
+  background:#ddd;
+}
+
+/* ================= SIDE MENU ================= */
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  z-index:40;
+  display:none;
+}
+
+.overlay.show{
+  display:block;
+}
+
+.side-menu{
+  position:fixed;
+  z-index:50;
+  top:0;
+  left:-290px;
+  width:280px;
+  height:100vh;
+  background:#0b0b0b;
+  border-right:1px solid #252525;
+  transition:.25s;
+  padding:18px;
+}
+
+.side-menu.show{
+  left:0;
+}
+
+.menu-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:25px;
+}
+
+.menu-title strong{
+  font-size:19px;
+}
+
+.menu-item{
+  width:100%;
+  min-height:48px;
+  border:0;
+  background:transparent;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:0 12px;
+  border-radius:10px;
+  cursor:pointer;
+  text-align:left;
+  font-size:15px;
+}
+
+.menu-item:hover{
+  background:#181818;
+}
+
+.menu-item svg{
+  width:20px;
+  height:20px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+/* ================= POPUP ================= */
+
+.popup{
+  position:fixed;
+  z-index:60;
+  right:12px;
+  top:58px;
+  width:190px;
+  background:#111;
+  border:1px solid #2b2b2b;
+  border-radius:12px;
+  padding:6px;
+  display:none;
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
+}
+
+.popup.show{
+  display:block;
+}
+
+.popup button{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#fff;
+  padding:11px 12px;
+  border-radius:8px;
+  text-align:left;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.popup button:hover{
+  background:#1c1c1c;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+  position:fixed;
+  z-index:100;
+  left:50%;
+  bottom:90px;
+  transform:translateX(-50%) translateY(20px);
+  background:#fff;
+  color:#000;
+  padding:9px 15px;
+  border-radius:20px;
+  font-size:13px;
+  opacity:0;
+  pointer-events:none;
+  transition:.2s;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* ================= FILE ================= */
+
+#fileInput{
+  display:none;
+}
+
+.file-preview{
+  display:none;
+  padding:8px 12px 0;
+}
+
+.file-preview.show{
+  display:block;
+}
+
+.file-name{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  background:#171717;
+  border:1px solid #292929;
+  border-radius:10px;
+  padding:7px 10px;
+  font-size:12px;
+  color:#ccc;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:600px){
+
+  .topbar{
+    padding:0 8px;
+  }
+
+  .chat{
+    padding-left:14px;
+    padding-right:14px;
+  }
+
+  .message-container{
+    max-width:88%;
+  }
+
+  .welcome h1{
+    font-size:24px;
+  }
+
+  .welcome p{
+    font-size:14px;
+  }
+
+  .input-wrap{
+    padding-left:10px;
+    padding-right:10px;
+    padding-bottom:14px;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <div class="app">
 
-  <!-- TOP -->
-  <header class="topbar">
+<!-- ================= TOP BAR ================= -->
 
-    <button class="icon-btn" aria-label="Menu">
-      <svg width="22" height="22" viewBox="0 0 24 24">
-        <path d="M4 7h16M4 12h16M4 17h16"
-          stroke="currentColor"
-          fill="none"
-          stroke-width="2"
-          stroke-linecap="round"/>
+<header class="topbar">
+
+  <button class="icon-btn" id="menuBtn" aria-label="Menu">
+    <svg width="22" height="22" viewBox="0 0 24 24">
+      <path d="M4 7h16M4 12h16M4 17h16"
+      stroke="currentColor"
+      fill="none"
+      stroke-width="2"
+      stroke-linecap="round"/>
+    </svg>
+  </button>
+
+  <div class="brand">P-GPT</div>
+
+  <div class="top-actions">
+
+    <button class="icon-btn" id="newChatBtn" aria-label="New Chat">
+      <svg width="21" height="21" viewBox="0 0 24 24">
+        <path d="M12 20h9"/>
+        <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"/>
       </svg>
     </button>
 
-    <div class="brand">P-GPT</div>
+    <button class="icon-btn" id="moreTopBtn" aria-label="More">
+      <svg width="21" height="21" viewBox="0 0 24 24">
+        <circle cx="5" cy="12" r="1.3" fill="currentColor"/>
+        <circle cx="12" cy="12" r="1.3" fill="currentColor"/>
+        <circle cx="19" cy="12" r="1.3" fill="currentColor"/>
+      </svg>
+    </button>
 
-    <div class="top-actions">
+  </div>
 
-      <!-- New Chat -->
-      <button class="icon-btn" aria-label="New Chat">
-        <svg width="21" height="21" viewBox="0 0 24 24">
-          <path d="M12 20h9"/>
-          <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"/>
-        </svg>
-      </button>
+</header>
 
-      <!-- More -->
-      <button class="icon-btn" aria-label="More">
-        <svg width="21" height="21" viewBox="0 0 24 24">
-          <circle cx="5" cy="12" r="1.3" fill="currentColor"/>
-          <circle cx="12" cy="12" r="1.3" fill="currentColor"/>
-          <circle cx="19" cy="12" r="1.3" fill="currentColor"/>
-        </svg>
-      </button>
 
+<!-- ================= CHAT ================= -->
+
+<main class="chat" id="chatArea">
+
+  <section class="welcome" id="welcome">
+    <h1>How can I help you?</h1>
+    <p>Ask anything to P-GPT</p>
+  </section>
+
+</main>
+
+
+<!-- ================= INPUT ================= -->
+
+<div class="input-wrap">
+
+  <div class="file-preview" id="filePreview">
+    <div class="file-name">
+      <span id="fileName">File selected</span>
+      <button id="removeFile"
+        style="border:0;background:none;color:#aaa;cursor:pointer;">×</button>
     </div>
-  </header>
+  </div>
 
+  <div class="input-box">
 
-  <!-- CHAT -->
-  <main class="chat" id="chatArea">
+    <button class="input-btn" id="addBtn" aria-label="Add">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 5v14M5 12h14"/>
+      </svg>
+    </button>
 
-    <section class="welcome" id="welcome">
-      <h1>How can I help you?</h1>
-      <p>Ask anything to P-GPT</p>
-    </section>
+    <textarea
+      id="messageInput"
+      rows="1"
+      placeholder="Reply To P-GPT"></textarea>
 
+    <button class="input-btn" id="voiceBtn" aria-label="Voice">
+      <svg viewBox="0 0 24 24">
+        <rect x="9" y="3" width="6" height="12" rx="3"/>
+        <path d="M5 11a7 7 0 0 0 14 0"/>
+        <path d="M12 18v3M9 21h6"/>
+      </svg>
+    </button>
 
-    <!-- USER MESSAGE -->
-    <div class="message-row user">
-      <div class="message">
-      </div>
-    </div>
-
-
-    <!-- AI MESSAGE -->
-    <div class="message-row ai">
-
-      <div>
-
-        <div class="message">
-  
-        </div>
-
-        <div class="message-tools">
-
-          <!-- COPY -->
-          <button class="tool-btn" aria-label="Copy">
-            <svg viewBox="0 0 24 24">
-              <rect x="9" y="9" width="11" height="11" rx="2"/>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-            </svg>
-          </button>
-
-          <!-- LIKE -->
-          <button class="tool-btn" aria-label="Like">
-            <svg viewBox="0 0 24 24">
-              <path d="M7 10v10H4a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2h3Z"/>
-              <path d="M7 20h10.5a2 2 0 0 0 1.9-1.4l2-6A2 2 0 0 0 19.5 10H15l.7-4.2A3 3 0 0 0 12.8 2L7 10"/>
-            </svg>
-          </button>
-
-          <!-- DISLIKE -->
-          <button class="tool-btn" aria-label="Dislike">
-            <svg viewBox="0 0 24 24">
-              <path d="M7 14V4H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h3Z"/>
-              <path d="M7 4h10.5a2 2 0 0 1 1.9 1.4l2 6A2 2 0 0 1 19.5 14H15l.7 4.2a3 3 0 0 1-2.9 3.8L7 14"/>
-            </svg>
-          </button>
-
-          <!-- SPEAKER -->
-          <button class="tool-btn" aria-label="Speaker">
-            <svg viewBox="0 0 24 24">
-              <path d="M4 9v6h4l5 4V5L8 9H4Z"/>
-              <path d="M17 9a4 4 0 0 1 0 6"/>
-              <path d="M19.5 6.5a8 8 0 0 1 0 11"/>
-            </svg>
-          </button>
-
-          <!-- SHARE -->
-          <button class="tool-btn" aria-label="Share">
-            <svg viewBox="0 0 24 24">
-              <path d="M12 16V4"/>
-              <path d="m7 9 5-5 5 5"/>
-              <path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7"/>
-            </svg>
-          </button>
-
-          <!-- MORE -->
-          <button class="tool-btn" aria-label="More">
-            <svg viewBox="0 0 24 24">
-              <circle cx="5" cy="12" r="1.2" fill="currentColor"/>
-              <circle cx="12" cy="12" r="1.2" fill="currentColor"/>
-              <circle cx="19" cy="12" r="1.2" fill="currentColor"/>
-            </svg>
-          </button>
-
-        </div>
-
-      </div>
-    </div>
-
-  </main>
-
-
-  <!-- INPUT -->
-  <div class="input-wrap">
-
-    <div class="input-box">
-
-      <!-- PLUS -->
-      <button class="input-btn" aria-label="Add">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 5v14M5 12h14"/>
-        </svg>
-      </button>
-
-      <textarea
-        id="messageInput"
-        rows="1"
-        placeholder="Reply To P-GPT"></textarea>
-
-      <!-- VOICE -->
-      <button class="input-btn" id="voiceBtn" aria-label="Voice">
-        <svg viewBox="0 0 24 24">
-          <rect x="9" y="3" width="6" height="12" rx="3"/>
-          <path d="M5 11a7 7 0 0 0 14 0"/>
-          <path d="M12 18v3M9 21h6"/>
-        </svg>
-      </button>
-
-      <!-- LIVE -->
-      <button class="input-btn live-btn" id="liveBtn" aria-label="Live">
-        <svg viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="8"/>
-          <circle cx="12" cy="12" r="3" fill="currentColor"/>
-        </svg>
-      </button>
-
-      <!-- SEND -->
-      <button class="input-btn send-btn" id="sendBtn" aria-label="Send">
-        <svg viewBox="0 0 24 24">
-          <path d="m4 4 16 8-16 8 3-8-3-8Z"/>
-          <path d="M7 12h13"/>
-        </svg>
-      </button>
-
-    </div>
+    <button class="input-btn send-btn" id="sendBtn" aria-label="Send">
+      <svg viewBox="0 0 24 24">
+        <path d="m4 4 16 8-16 8 3-8-3-8Z"/>
+        <path d="M7 12h13"/>
+      </svg>
+    </button>
 
   </div>
 
 </div>
 
+</div>
+
+
+<!-- ================= SIDE MENU ================= -->
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="side-menu" id="sideMenu">
+
+  <div class="menu-title">
+    <strong>P-GPT</strong>
+
+    <button class="icon-btn" id="closeMenu">
+      <span style="font-size:25px;">×</span>
+    </button>
+  </div>
+
+  <button class="menu-item" id="menuNewChat">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 20h9"/>
+      <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"/>
+    </svg>
+    New Chat
+  </button>
+
+  <button class="menu-item" id="menuClear">
+    <svg viewBox="0 0 24 24">
+      <path d="M3 6h18"/>
+      <path d="M8 6V4h8v2"/>
+      <path d="M19 6l-1 15H6L5 6"/>
+      <path d="M10 11v6M14 11v6"/>
+    </svg>
+    Clear Chat
+  </button>
+
+  <button class="menu-item">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.4 1.4-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6V20h-2v-.2a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L9 17.1l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H7v-2h.8a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L9 9.1l1.4-1.4.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.6V6h2v.5a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1 1.4 1.4-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.5v2h-.5a1.7 1.7 0 0 0-1.6.9Z"/>
+    </svg>
+    Settings
+  </button>
+
+</aside>
+
+
+<!-- ================= TOP MORE POPUP ================= -->
+
+<div class="popup" id="topPopup">
+  <button id="popupNew">New Chat</button>
+  <button id="popupClear">Clear Chat</button>
+  <button id="popupAbout">About P-GPT</button>
+</div>
+
+
+<!-- ================= TOAST ================= -->
+
+<div class="toast" id="toast"></div>
+
+<input type="file" id="fileInput" accept="image/*,.pdf,.txt,.doc,.docx">
+
 
 <script>
-  const input = document.getElementById("messageInput");
-  const sendBtn = document.getElementById("sendBtn");
-  const liveBtn = document.getElementById("liveBtn");
 
-  function updateInputButtons() {
-    const hasText = input.value.trim().length > 0;
+/* ================= ELEMENTS ================= */
 
-    sendBtn.style.display = hasText ? "flex" : "none";
-    liveBtn.style.display = hasText ? "none" : "flex";
-  }
+const chatArea = document.getElementById("chatArea");
+const welcome = document.getElementById("welcome");
 
-  input.addEventListener("input", updateInputButtons);
+const input = document.getElementById("messageInput");
+const sendBtn = document.getElementById("sendBtn");
+const voiceBtn = document.getElementById("voiceBtn");
 
-  sendBtn.addEventListener("click", () => {
-    const text = input.value.trim();
+const menuBtn = document.getElementById("menuBtn");
+const closeMenu = document.getElementById("closeMenu");
+const sideMenu = document.getElementById("sideMenu");
+const overlay = document.getElementById("overlay");
 
-    if (!text) return;
+const newChatBtn = document.getElementById("newChatBtn");
+const moreTopBtn = document.getElementById("moreTopBtn");
+const topPopup = document.getElementById("topPopup");
 
-    alert("Message sent: " + text);
-    input.value = "";
-    updateInputButtons();
-  });
+const addBtn = document.getElementById("addBtn");
+const fileInput = document.getElementById("fileInput");
+const filePreview = document.getElementById("filePreview");
+const fileName = document.getElementById("fileName");
+const removeFile = document.getElementById("removeFile");
 
-  input.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
+const toast = document.getElementById("toast");
 
-      if (input.value.trim()) {
-        sendBtn.click();
-      }
+
+/* ================= TOAST ================= */
+
+let toastTimer;
+
+function showToast(message){
+
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(()=>{
+    toast.classList.remove("show");
+  },1800);
+}
+
+
+/* ================= INPUT ================= */
+
+function updateInputButtons(){
+
+  const hasText = input.value.trim().length > 0;
+
+  sendBtn.style.display = hasText ? "flex" : "none";
+  voiceBtn.style.display = hasText ? "none" : "flex";
+}
+
+input.addEventListener("input",updateInputButtons);
+
+
+/* ================= AUTO HEIGHT ================= */
+
+input.addEventListener("input",()=>{
+
+  input.style.height="auto";
+
+  input.style.height =
+    Math.min(input.scrollHeight,120) + "px";
+
+});
+
+
+/* ================= ADD FILE ================= */
+
+addBtn.addEventListener("click",()=>{
+  fileInput.click();
+});
+
+fileInput.addEventListener("change",()=>{
+
+  const file=fileInput.files[0];
+
+  if(!file)return;
+
+  fileName.textContent=file.name;
+  filePreview.classList.add("show");
+
+  showToast("File selected");
+});
+
+removeFile.addEventListener("click",()=>{
+
+  fileInput.value="";
+  filePreview.classList.remove("show");
+
+});
+
+
+/* ================= CREATE USER MESSAGE ================= */
+
+function createUserMessage(text){
+
+  const row=document.createElement("div");
+
+  row.className="message-row user";
+
+  row.innerHTML=`
+    <div class="message-container">
+      <div class="message"></div>
+    </div>
+  `;
+
+  row.querySelector(".message").textContent=text;
+
+  chatArea.appendChild(row);
+
+  scrollToBottom();
+}
+
+
+/* ================= CREATE AI MESSAGE ================= */
+
+function createAIMessage(text){
+
+  const row=document.createElement("div");
+
+  row.className="message-row ai";
+
+  row.innerHTML=`
+
+    <div class="message-container">
+
+      <div class="message"></div>
+
+      <div class="message-tools">
+
+        <button class="tool-btn copy-btn" aria-label="Copy">
+
+          <svg viewBox="0 0 24 24">
+            <rect x="9" y="9" width="11" height="11" rx="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+
+        </button>
+
+
+        <button class="tool-btn like-btn" aria-label="Like">
+
+          <svg viewBox="0 0 24 24">
+            <path d="M7 10v10H4a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2h3Z"/>
+            <path d="M7 20h10.5a2 2 0 0 0 1.9-1.4l2-6A2 2 0 0 0 19.5 10H15l.7-4.2A3 3 0 0 0 12.8 2L7 10"/>
+          </svg>
+
+        </button>
+
+
+        <button class="tool-btn dislike-btn" aria-label="Dislike">
+
+          <svg viewBox="0 0 24 24">
+            <path d="M7 14V4H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h3Z"/>
+            <path d="M7 4h10.5a2 2 0 0 1 1.9 1.4l2 6A2 2 0 0 1 19.5 14H15l.7 4.2a3 3 0 0 1-2.9 3.8L7 14"/>
+          </svg>
+
+        </button>
+
+
+        <button class="tool-btn speak-btn" aria-label="Speaker">
+
+          <svg viewBox="0 0 24 24">
+            <path d="M4 9v6h4l5 4V5L8 9H4Z"/>
+            <path d="M17 9a4 4 0 0 1 0 6"/>
+            <path d="M19.5 6.5a8 8 0 0 1 0 11"/>
+          </svg>
+
+        </button>
+
+
+        <button class="tool-btn share-btn" aria-label="Share">
+
+          <svg viewBox="0 0 24 24">
+            <path d="M12 16V4"/>
+            <path d="m7 9 5-5 5 5"/>
+            <path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7"/>
+          </svg>
+
+        </button>
+
+
+        <button class="tool-btn more-message-btn" aria-label="More">
+
+          <svg viewBox="0 0 24 24">
+            <circle cx="5" cy="12" r="1.2" fill="currentColor"/>
+            <circle cx="12" cy="12" r="1.2" fill="currentColor"/>
+            <circle cx="19" cy="12" r="1.2" fill="currentColor"/>
+          </svg>
+
+        </button>
+
+      </div>
+
+    </div>
+  `;
+
+  row.querySelector(".message").textContent=text;
+
+  chatArea.appendChild(row);
+
+  setupMessageButtons(row);
+
+  scrollToBottom();
+}
+
+
+/* ================= BUTTON FUNCTIONS ================= */
+
+function setupMessageButtons(row){
+
+  const message =
+    row.querySelector(".message").textContent;
+
+  const copyBtn =
+    row.querySelector(".copy-btn");
+
+  const likeBtn =
+    row.querySelector(".like-btn");
+
+  const dislikeBtn =
+    row.querySelector(".dislike-btn");
+
+  const speakBtn =
+    row.querySelector(".speak-btn");
+
+  const shareBtn =
+    row.querySelector(".share-btn");
+
+  const moreBtn =
+    row.querySelector(".more-message-btn");
+
+
+  /* COPY */
+
+  copyBtn.addEventListener("click",async()=>{
+
+    try{
+
+      await navigator.clipboard.writeText(message);
+
+      showToast("Copied");
+
+    }catch{
+
+      showToast("Copy unavailable");
+
     }
+
   });
+
+
+  /* LIKE */
+
+  likeBtn.addEventListener("click",()=>{
+
+    likeBtn.classList.toggle("active");
+
+    dislikeBtn.classList.remove("active");
+
+    showToast(
+      likeBtn.classList.contains("active")
+      ? "Liked"
+      : "Like removed"
+    );
+
+  });
+
+
+  /* DISLIKE */
+
+  dislikeBtn.addEventListener("click",()=>{
+
+    dislikeBtn.classList.toggle("active");
+
+    likeBtn.classList.remove("active");
+
+    showToast(
+      dislikeBtn.classList.contains("active")
+      ? "Feedback saved"
+      : "Feedback removed"
+    );
+
+  });
+
+
+  /* SPEAKER */
+
+  speakBtn.addEventListener("click",()=>{
+
+    if(!("speechSynthesis" in window)){
+
+      showToast("Voice unavailable");
+      return;
+
+    }
+
+    speechSynthesis.cancel();
+
+    const speech =
+      new SpeechSynthesisUtterance(message);
+
+    speech.lang="en-US";
+
+    speechSynthesis.speak(speech);
+
+    showToast("Speaking");
+
+  });
+
+
+  /* SHARE */
+
+  shareBtn.addEventListener("click",async()=>{
+
+    if(navigator.share){
+
+      try{
+
+        await navigator.share({
+          title:"P-GPT",
+          text:message
+        });
+
+      }catch{}
+
+    }else{
+
+      try{
+
+        await navigator.clipboard.writeText(message);
+        showToast("Response copied");
+
+      }catch{
+
+        showToast("Share unavailable");
+
+      }
+
+    }
+
+  });
+
+
+  /* MORE */
+
+  moreBtn.addEventListener("click",()=>{
+
+    const action=confirm(
+      "OK = Copy response\nCancel = Close"
+    );
+
+    if(action){
+
+      navigator.clipboard
+        .writeText(message)
+        .then(()=>showToast("Copied"));
+
+    }
+
+  });
+
+}
+
+
+/* ================= SEND ================= */
+
+function sendMessage(){
+
+  const text=input.value.trim();
+
+  if(!text)return;
+
+
+  welcome.style.display="none";
+
+  createUserMessage(text);
+
+  input.value="";
+  input.style.height="auto";
 
   updateInputButtons();
+
+
+  /*
+    DEMO RESPONSE
+
+    এখানে এখন local demo response দেখানো হচ্ছে।
+    পরে এখানে P-GPT backend/API যুক্ত করা যাবে।
+  */
+
+  setTimeout(()=>{
+
+    const reply =
+      "Hello! I’m P-GPT.\n\n" +
+      "Your message was received successfully. " +
+      "The P-GPT chat interface is working.";
+
+    createAIMessage(reply);
+
+  },500);
+
+}
+
+
+sendBtn.addEventListener("click",sendMessage);
+
+
+input.addEventListener("keydown",(e)=>{
+
+  if(e.key==="Enter" && !e.shiftKey){
+
+    e.preventDefault();
+
+    if(input.value.trim()){
+      sendMessage();
+    }
+
+  }
+
+});
+
+
+/* ================= NEW CHAT ================= */
+
+function newChat(){
+
+  chatArea.innerHTML="";
+
+  chatArea.appendChild(welcome);
+
+  welcome.style.display="flex";
+
+  input.value="";
+  input.style.height="auto";
+
+  updateInputButtons();
+
+  fileInput.value="";
+  filePreview.classList.remove("show");
+
+  closeSideMenu();
+  topPopup.classList.remove("show");
+
+  showToast("New chat");
+
+}
+
+
+newChatBtn.addEventListener("click",newChat);
+
+document
+  .getElementById("menuNewChat")
+  .addEventListener("click",newChat);
+
+document
+  .getElementById("popupNew")
+  .addEventListener("click",newChat);
+
+
+/* ================= CLEAR CHAT ================= */
+
+function clearChat(){
+
+  chatArea.innerHTML="";
+
+  chatArea.appendChild(welcome);
+
+  welcome.style.display="flex";
+
+  closeSideMenu();
+  topPopup.classList.remove("show");
+
+  showToast("Chat cleared");
+
+}
+
+document
+  .getElementById("menuClear")
+  .addEventListener("click",clearChat);
+
+document
+  .getElementById("popupClear")
+  .addEventListener("click",clearChat);
+
+
+/* ================= SIDE MENU ================= */
+
+function openSideMenu(){
+
+  sideMenu.classList.add("show");
+  overlay.classList.add("show");
+
+}
+
+function closeSideMenu(){
+
+  sideMenu.classList.remove("show");
+  overlay.classList.remove("show");
+
+}
+
+menuBtn.addEventListener("click",openSideMenu);
+
+closeMenu.addEventListener("click",closeSideMenu);
+
+overlay.addEventListener("click",closeSideMenu);
+
+
+/* ================= TOP MORE ================= */
+
+moreTopBtn.addEventListener("click",(e)=>{
+
+  e.stopPropagation();
+
+  topPopup.classList.toggle("show");
+
+});
+
+document.addEventListener("click",(e)=>{
+
+  if(
+    !topPopup.contains(e.target) &&
+    e.target!==moreTopBtn
+  ){
+
+    topPopup.classList.remove("show");
+
+  }
+
+});
+
+
+/* ================= ABOUT ================= */
+
+document
+  .getElementById("popupAbout")
+  .addEventListener("click",()=>{
+
+    topPopup.classList.remove("show");
+
+    showToast("P-GPT AI Assistant");
+
+  });
+
+
+/* ================= VOICE INPUT ================= */
+
+let recognition=null;
+
+if(
+  "SpeechRecognition" in window ||
+  "webkitSpeechRecognition" in window
+){
+
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+  recognition=new SpeechRecognition();
+
+  recognition.lang="en-US";
+
+  recognition.continuous=false;
+
+  recognition.interimResults=false;
+
+
+  recognition.onstart=()=>{
+
+    voiceBtn.classList.add("active");
+    showToast("Listening...");
+
+  };
+
+
+  recognition.onresult=(event)=>{
+
+    const transcript =
+      event.results[0][0].transcript;
+
+    input.value +=
+      (input.value ? " " : "") + transcript;
+
+    updateInputButtons();
+
+  };
+
+
+  recognition.onend=()=>{
+
+    voiceBtn.classList.remove("active");
+
+  };
+
+
+  recognition.onerror=()=>{
+
+    voiceBtn.classList.remove("active");
+
+    showToast("Voice input unavailable");
+
+  };
+
+
+  voiceBtn.addEventListener("click",()=>{
+
+    try{
+
+      recognition.start();
+
+    }catch{}
+
+  });
+
+}else{
+
+  voiceBtn.addEventListener("click",()=>{
+
+    showToast("Voice input unavailable");
+
+  });
+
+}
+
+
+/* ================= SCROLL ================= */
+
+function scrollToBottom(){
+
+  setTimeout(()=>{
+
+    chatArea.scrollTo({
+      top:chatArea.scrollHeight,
+      behavior:"smooth"
+    });
+
+  },50);
+
+}
+
+
+/* ================= START ================= */
+
+updateInputButtons();
+
 </script>
 
 </body>
