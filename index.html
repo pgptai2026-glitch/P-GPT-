@@ -228,6 +228,37 @@ svg{
   white-space:pre-wrap;
 }
 
+/* ================= THINKING ================= */
+
+.thinking{
+  color:#777;
+  font-size:15px;
+  line-height:1.65;
+}
+
+.thinking-dots::after{
+  content:".";
+  animation:thinkingDots 1.2s infinite;
+}
+
+@keyframes thinkingDots{
+  0%{
+    content:".";
+  }
+
+  33%{
+    content:"..";
+  }
+
+  66%{
+    content:"...";
+  }
+
+  100%{
+    content:".";
+  }
+}
+
 /* AI MESSAGE ACTIONS */
 
 .message-actions{
@@ -715,10 +746,6 @@ svg{
 
 <body>
 
-<!-- =====================================================
-     LOGIN / SIGN UP
-===================================================== -->
-
 <div class="login-screen" id="loginScreen">
 
   <div class="login-box">
@@ -768,19 +795,11 @@ svg{
 </div>
 
 
-<!-- =====================================================
-     MAIN APP
-===================================================== -->
-
 <div class="app" id="app">
-
-  <!-- HEADER -->
 
   <header class="header">
 
     <div class="header-left">
-
-      <!-- MENU -->
 
       <button class="icon-btn" id="menuBtn" aria-label="Menu">
         <svg viewBox="0 0 24 24">
@@ -796,10 +815,7 @@ svg{
 
     </div>
 
-
     <div class="header-right">
-
-      <!-- NEW CHAT -->
 
       <button class="icon-btn" id="newChatBtn" aria-label="New Chat">
         <svg viewBox="0 0 24 24">
@@ -807,9 +823,6 @@ svg{
           <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"/>
         </svg>
       </button>
-
-
-      <!-- MORE -->
 
       <button class="icon-btn" id="topMoreBtn" aria-label="More">
         <svg viewBox="0 0 24 24">
@@ -824,8 +837,6 @@ svg{
   </header>
 
 
-  <!-- CHAT -->
-
   <main class="chat-area" id="chatArea">
 
     <div class="welcome" id="welcome">
@@ -837,13 +848,9 @@ svg{
   </main>
 
 
-  <!-- INPUT -->
-
   <div class="input-area">
 
     <div class="input-box">
-
-      <!-- PLUS -->
 
       <button
         class="input-btn"
@@ -856,9 +863,6 @@ svg{
         </svg>
       </button>
 
-
-      <!-- INPUT -->
-
       <input
         class="input"
         id="messageInput"
@@ -866,9 +870,6 @@ svg{
         placeholder="Message P-GPT..."
         autocomplete="off"
       >
-
-
-      <!-- LIVE VOICE -->
 
       <button
         class="input-btn"
@@ -888,9 +889,6 @@ svg{
         </svg>
       </button>
 
-
-      <!-- SEND -->
-
       <button
         class="input-btn send-btn"
         id="sendBtn"
@@ -901,9 +899,6 @@ svg{
           <path d="M22 2 11 13"/>
         </svg>
       </button>
-
-
-      <!-- NORMAL VOICE -->
 
       <button
         class="input-btn"
@@ -931,10 +926,6 @@ svg{
 </div>
 
 
-<!-- =====================================================
-     SIDE MENU
-===================================================== -->
-
 <div class="overlay" id="overlay"></div>
 
 <aside class="side-menu" id="sideMenu">
@@ -949,118 +940,70 @@ svg{
 
   </div>
 
-
-  <!-- SEARCH -->
-
   <button class="menu-item" id="menuSearch">
-
     <svg viewBox="0 0 24 24">
       <circle cx="11" cy="11" r="7"/>
       <path d="m20 20-4-4"/>
     </svg>
-
     <span>Search</span>
-
   </button>
 
-
-  <!-- NEW CHAT -->
-
   <button class="menu-item" id="menuNewChat">
-
     <svg viewBox="0 0 24 24">
       <path d="M12 20h9"/>
       <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"/>
     </svg>
-
     <span>New Chat</span>
-
   </button>
 
-
-  <!-- HISTORY -->
-
   <button class="menu-item" id="menuHistory">
-
     <svg viewBox="0 0 24 24">
       <circle cx="12" cy="12" r="9"/>
       <path d="M12 7v5l3 2"/>
     </svg>
-
     <span>Chat History</span>
-
   </button>
-
 
   <div class="menu-divider"></div>
 
-
-  <!-- SETTINGS -->
-
   <button class="menu-item" id="menuSettings">
-
     <svg viewBox="0 0 24 24">
       <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/>
       <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.4 1.4-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6V20h-2v-.2a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L9 17.1l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H7v-2h.2a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L8.4 9l1.4-1.4.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.6V6h2v.2a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L20.2 9l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v2h-.2a1.7 1.7 0 0 0-1.6 1Z"/>
     </svg>
-
     <span>Settings</span>
-
   </button>
 
-
-  <!-- HELP -->
-
   <button class="menu-item" id="menuHelp">
-
     <svg viewBox="0 0 24 24">
       <circle cx="12" cy="12" r="9"/>
       <path d="M9.5 9a2.5 2.5 0 1 1 4.2 1.8c-.9.7-1.7 1.1-1.7 2.2"/>
       <path d="M12 17h.01"/>
     </svg>
-
     <span>Help</span>
-
   </button>
-
 
   <div class="menu-divider"></div>
 
-
-  <!-- ACCOUNT -->
-
   <button class="menu-item" id="menuAccount">
-
     <svg viewBox="0 0 24 24">
       <circle cx="12" cy="8" r="4"/>
       <path d="M4 21a8 8 0 0 1 16 0"/>
     </svg>
-
     <span>Account</span>
-
   </button>
 
-
-  <!-- LOGOUT -->
-
   <button class="menu-item" id="logoutBtn">
-
     <svg viewBox="0 0 24 24">
       <path d="M10 17l5-5-5-5"/>
       <path d="M15 12H3"/>
       <path d="M21 19V5a2 2 0 0 0-2-2h-6"/>
     </svg>
-
     <span>Logout</span>
-
   </button>
 
 </aside>
 
-
-<!-- =====================================================
-     TOP MORE MENU
-===================================================== -->
 
 <div class="more-menu" id="topMoreMenu">
 
@@ -1083,10 +1026,6 @@ svg{
 </div>
 
 
-<!-- =====================================================
-     SEARCH PAGE
-===================================================== -->
-
 <section class="page" id="searchPage">
 
   <div class="page-header">
@@ -1100,7 +1039,6 @@ svg{
     <span>Search</span>
 
   </div>
-
 
   <div class="page-content">
 
@@ -1118,7 +1056,6 @@ svg{
       >
 
     </div>
-
 
     <div class="section-title">
       Recent chats
@@ -1141,10 +1078,6 @@ svg{
 </section>
 
 
-<!-- =====================================================
-     HISTORY PAGE
-===================================================== -->
-
 <section class="page" id="historyPage">
 
   <div class="page-header">
@@ -1158,7 +1091,6 @@ svg{
     <span>Chat History</span>
 
   </div>
-
 
   <div class="page-content">
 
@@ -1178,7 +1110,6 @@ svg{
       Photo editing
     </div>
 
-
     <div class="section-title" style="margin-top:25px;">
       Yesterday
     </div>
@@ -1196,10 +1127,6 @@ svg{
 </section>
 
 
-<!-- =====================================================
-     SETTINGS PAGE
-===================================================== -->
-
 <section class="page" id="settingsPage">
 
   <div class="page-header">
@@ -1214,11 +1141,9 @@ svg{
 
   </div>
 
-
   <div class="page-content">
 
     <div class="setting-group">
-
       <div class="setting-title">
         Account
       </div>
@@ -1227,12 +1152,9 @@ svg{
         <span>Email / Account</span>
         <span class="setting-right">›</span>
       </div>
-
     </div>
 
-
     <div class="setting-group">
-
       <div class="setting-title">
         Appearance
       </div>
@@ -1241,12 +1163,9 @@ svg{
         <span>Dark Mode</span>
         <span class="setting-right">On</span>
       </div>
-
     </div>
 
-
     <div class="setting-group">
-
       <div class="setting-title">
         Chat
       </div>
@@ -1255,12 +1174,9 @@ svg{
         <span>Enter to send</span>
         <span class="setting-right">On</span>
       </div>
-
     </div>
 
-
     <div class="setting-group">
-
       <div class="setting-title">
         Voice
       </div>
@@ -1269,12 +1185,9 @@ svg{
         <span>Voice settings</span>
         <span class="setting-right">›</span>
       </div>
-
     </div>
 
-
     <div class="setting-group">
-
       <div class="setting-title">
         Language
       </div>
@@ -1283,12 +1196,9 @@ svg{
         <span>Language</span>
         <span class="setting-right">English</span>
       </div>
-
     </div>
 
-
     <div class="setting-group">
-
       <div class="setting-title">
         About P-GPT
       </div>
@@ -1297,17 +1207,12 @@ svg{
         <span>Version</span>
         <span class="setting-right">1.0</span>
       </div>
-
     </div>
 
   </div>
 
 </section>
 
-
-<!-- =====================================================
-     HELP PAGE
-===================================================== -->
 
 <section class="page" id="helpPage">
 
@@ -1322,7 +1227,6 @@ svg{
     <span>Help</span>
 
   </div>
-
 
   <div class="page-content">
 
@@ -1363,10 +1267,6 @@ svg{
 </section>
 
 
-<!-- =====================================================
-     ACCOUNT PAGE
-===================================================== -->
-
 <section class="page" id="accountPage">
 
   <div class="page-header">
@@ -1380,7 +1280,6 @@ svg{
     <span>Account</span>
 
   </div>
-
 
   <div class="page-content">
 
@@ -1400,7 +1299,6 @@ svg{
 
     </div>
 
-
     <button class="logout-btn" id="accountLogout">
       Logout
     </button>
@@ -1410,11 +1308,11 @@ svg{
 </section>
 
 
-<!-- =====================================================
-     ADD MENU
-===================================================== -->
-
-<div class="more-menu" id="addMenu" style="left:12px;right:auto;top:auto;bottom:72px;">
+<div
+  class="more-menu"
+  id="addMenu"
+  style="left:12px;right:auto;top:auto;bottom:72px;"
+>
 
   <button class="more-item" id="cameraBtn">
     Camera
@@ -1430,6 +1328,7 @@ svg{
 
 </div>
 
+
 <input
   type="file"
   id="photoInput"
@@ -1444,16 +1343,11 @@ svg{
 >
 
 
-<!-- =====================================================
-     LIVE VOICE
-===================================================== -->
-
 <section class="voice-page" id="voicePage">
 
   <div class="voice-header">
     P-GPT Live Voice
   </div>
-
 
   <div class="voice-content">
 
@@ -1477,16 +1371,13 @@ svg{
 
     </div>
 
-
     <div class="voice-status" id="voiceStatus">
       Listening...
     </div>
 
-
     <div class="voice-text" id="voiceText">
       Speak to P-GPT
     </div>
-
 
     <button class="voice-stop" id="voiceStop">
 
@@ -1506,8 +1397,6 @@ svg{
 
 </section>
 
-
-<!-- TOAST -->
 
 <div class="toast" id="toast"></div>
 
@@ -2099,21 +1988,21 @@ updateInputButtons();
 
 
 /* =====================================================
-   SEND MESSAGE
+   SEND MESSAGE — REAL P-GPT AI
 ===================================================== */
 
-function sendMessage(){
+async function sendMessage(){
 
   const text =
     input.value.trim();
 
   if(!text){
-
     return;
-
   }
 
   welcome?.remove();
+
+  /* USER MESSAGE */
 
   addUserMessage(text);
 
@@ -2121,13 +2010,99 @@ function sendMessage(){
 
   updateInputButtons();
 
-  setTimeout(()=>{
+
+  /* ================= THINKING ================= */
+
+  const thinkingRow =
+    document.createElement("div");
+
+  thinkingRow.className =
+    "message-row ai";
+
+  thinkingRow.innerHTML = `
+    <div class="message">
+      <div class="thinking">
+        Thinking<span class="thinking-dots"></span>
+      </div>
+    </div>
+  `;
+
+  chatArea.appendChild(thinkingRow);
+
+  chatArea.scrollTop =
+    chatArea.scrollHeight;
+
+
+  /* ================= REAL AI REQUEST ================= */
+
+  try{
+
+    const response =
+      await fetch(
+        "https://p-gpt-api.pgptai2026.workers.dev",
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":"application/json"
+          },
+
+          body:JSON.stringify({
+            message:text
+          })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    /* REMOVE THINKING */
+
+    thinkingRow.remove();
+
+
+    /* API ERROR */
+
+    if(!response.ok){
+
+      addAIMessage(
+        data.error ||
+        "Something went wrong."
+      );
+
+      return;
+    }
+
+
+    /* REAL AI RESPONSE */
 
     addAIMessage(
-      "This is a demo response from P-GPT. Connect your secure backend/API to receive real AI responses."
+      data.reply ||
+      "No response received."
     );
 
-  },600);
+
+  }catch(error){
+
+    /* REMOVE THINKING */
+
+    thinkingRow.remove();
+
+
+    /* CONNECTION ERROR */
+
+    addAIMessage(
+      "Unable to connect to P-GPT AI."
+    );
+
+    console.error(
+      "P-GPT Error:",
+      error
+    );
+
+  }
 
 }
 
@@ -2750,4 +2725,4 @@ updateInputButtons();
 </script>
 
 </body>
-      </html>
+  </html>
